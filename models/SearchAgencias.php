@@ -8,9 +8,9 @@ use yii\data\ActiveDataProvider;
 use app\models\Agencias;
 
 /**
- * AgenciasSearch represents the model behind the search form about `app\models\Agencias`.
+ * SearchAgencias represents the model behind the search form about `app\models\Agencias`.
  */
-class AgenciasSearch extends Agencias
+class SearchAgencias extends Agencias
 {
     /**
      * @inheritdoc
@@ -43,8 +43,6 @@ class AgenciasSearch extends Agencias
     {
         $query = Agencias::find();
 
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -57,7 +55,6 @@ class AgenciasSearch extends Agencias
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'AgenciaID' => $this->AgenciaID,
             'Estado' => $this->Estado,

@@ -8,10 +8,11 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use app\assets\BootswatchAsset;
+use app\assets\AppAsset;
 
-BootswatchAsset::$theme = 'superhero';
-BootswatchAsset::register($this);
+raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
+AppAsset::register($this);
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>

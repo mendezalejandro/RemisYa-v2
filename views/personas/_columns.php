@@ -3,45 +3,35 @@ use yii\helpers\Url;
 
 return [
     [
-        'class' => 'kartik\grid\CheckboxColumn',
-        'width' => '20px',
-    ],
-    [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
     ],
-        [
+    [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'PersonaID',
+        'attribute'=>'Nombre',
     ],
+    [
+         'class'=>'\kartik\grid\DataColumn',
+         'attribute'=>'Apellido',
+     ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Usuario',
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'Password',
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Telefono',
     ],
     [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'Nombre',
-    ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'Apellido',
-    // ],
+         'class'=>'\kartik\grid\DataColumn',
+         'attribute'=>'Email',
+     ],
+
     // [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'Documento',
     // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'Email',
-    // ],
+    // 
     // [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'RolID',
