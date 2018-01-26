@@ -1,53 +1,94 @@
 <?php
 
-/* @var $this yii\web\View */
+use yii\helpers\Html;
+use yii\bootstrap\Nav;
+use yii\bootstrap\NavBar;
+use yii\widgets\Breadcrumbs;
+use yii\bootstrap\ActiveForm;
+use yii\helpers\Url;
+use yii\bootstrap\Modal;
+use app\assets\AppAsset;
+raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
+AppAsset::register($this);
 
-$this->title = 'My Yii Application';
+
+Modal::begin([
+    'id' => 'modal',
+    //'size' => 'modal-lg',
+]);
+echo "<div id='modalContent'></div>";
+Modal::end();
 ?>
-<div class="site-index">
 
+<div class="wrap" style="background-image:url(img/portada.jpg)">
+    <br />
+    <br />
+    <br />
     <div class="jumbotron">
-        <h1>Congratulations!</h1>
-
-        <p class="lead">You have successfully created your Yii-powered application.</p>
-
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
+        <h1>Bienvenidos a RemisYa!</h1>
+        <p>La primera aplicacion web en el mercado pensada para su Agencia y sus clientes..</p>
+        <p>Administre de manera mas eficaz la gestion, minimice costos y errores humanos, aproveche un nuevo canal de ventas.</p>
+        <?php ActiveForm::begin() ?>
+        <p>
+            <?= Html::button('Solicitar Remis', ['value' => Url::toRoute('/site/login'), 'class' => 'btn btn-primary btn-lg', 'id' => 'modalButton']); ?>
+        </p>
+        <?php ActiveForm::end() ?>
     </div>
-
-    <div class="body-content">
-
+</div>
+<div class="section-tout" style="background-color:#eaf1f1">
+    <div class="container">
         <div class="row">
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/doc/">Yii Documentation &raquo;</a></p>
+            <div class="col-lg-4 col-sm-6">
+                <h3 class="product_description_title">
+                    <i class="fa fa-thumbs-up"></i>  Satisfacci&oacute;n a los requerimientos de los clientes
+                </h3>
+                <p class="product_description_text"> Al brindarle una atenci&oacute;n r&aacute;pida y personalizada, pudiendo elegir la remiseria que m&aacute;s le convenga en ubicacion, precio y servicio. Entre otros beneficios, el cliente tiene acceso inmediato a su historial y estad&iacute;sticas de consumo.
+                </p>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
-
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
-
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
+            <div class="col-lg-4 col-sm-6">
+                <h3 class="product_description_title">
+                    <i class="fa fa-puzzle-piece"></i>Totalmente adaptable a sus necesidades
+                </h3>
+                <p class="product_description_text">
+                    Adaptable a sus modalidades operativas y administrativas, ofreciendo la mejor alternativas de funcionamiento para uno o varios equipos y operadores.
+                </p>
             </div>
-            <div class="col-lg-4">
-                <h2>Heading</h2>
 
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
-                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-                    ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                    fugiat nulla pariatur.</p>
+            <div class="col-lg-4 col-sm-6">
+                <h3 class="product_description_title">
+                    <i class="fa fa-sitemap"></i>  Dise&ntilde;o espec&iacute;fico
+                </h3>
+                <p class="product_description_text">
+                    Con la m&aacute;s amplia gama de plantillas, formularios, desarrollados y optimizados para la mas sencilla y completa administraci&oacute;n de Servicios de Remiser&iacute;a. Un software con m&uacute;ltiples herramientas que le permiten la posibilidad de realizar m&aacute;s tareas en menos tiempo y obtener datos precisos para la toma de decisiones.
+                </p>
+                <br />
+            </div>
 
-                <p><a class="btn btn-default" href="http://www.yiiframework.com/extensions/">Yii Extensions &raquo;</a></p>
+            <div class="col-lg-4 col-sm-6">
+                <h3 class="product_description_title">
+                    <i class="fa fa-line-chart"></i>  Reducci&oacute;n de costos que optimizan las ganancias de negocio
+                </h3>
+                <p class="product_description_text">
+                    Al posibilitar la disminuci&oacute;n de recursos de personal y tiempo destinados a tareas administrativas, a trav&eacute;s del ordenamiento y automatizaci&oacute;n de dichas tareas y por lo tanto, optimizando las ganancias de negocio.
+                </p>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <h3 class="product_description_title">
+                    <i class="fa fa-shield"></i>  Seguridad
+                </h3>
+                <p class="product_description_text">
+                    Actualizaci&oacute;n de tecnolog&iacute;a al servicio del cliente. Veh&iacute;culos habilitados y con el seguro correpondiente. Seguimiento de la flota v&iacute;a web. Env&iacute;o de SMS con los datos del m&oacute;vil asignado.
+                </p>
+            </div>
+
+            <div class="col-lg-4 col-sm-6">
+                <h3 class="product_description_title">
+                    <i class="fa fa-users"></i>  Optimizaci&oacute;n del trabajo del personal operativo
+                </h3>
+                <p class="product_description_text">
+                    Al llevar un detallado registro del estado de situaci&oacute;n de los todos los servicios y el personal asignado, y las unidades operativas.
+                </p>
             </div>
         </div>
-
     </div>
 </div>
