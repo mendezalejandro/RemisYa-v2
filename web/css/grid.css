@@ -1,0 +1,49 @@
+table > thead > tr > th,
+.table > thead > tr > th,
+table > tbody > tr > th,
+.table > tbody > tr > th,
+table > tfoot > tr > th,
+.table > tfoot > tr > th,
+table > thead > tr > td,
+.table > thead > tr > td,
+table > tbody > tr > td,
+.table > tbody > tr > td,
+table > tfoot > tr > td,
+.table > tfoot > tr > td {
+  border-color: #2b3e50;
+}
+td input.form-control {
+    display: block;
+    width: 100%;
+    height: 20px;
+    padding: 8px 16px;
+    font-size: 15px;
+    line-height: 1.42857143;
+    color: #2b3e50;
+    background-color: #ffffff;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  }
+
+  table a:not(.btn),
+.table a:not(.btn) {
+  color: #fff;
+  font-size: 15px;
+  text-decoration: none;
+}
+th{
+    background-color: #BD5916;
+  }
+
+  label/*,
+.radio label,
+.checkbox label,
+.help-block*/ {
+  font-size: 15px;
+}
