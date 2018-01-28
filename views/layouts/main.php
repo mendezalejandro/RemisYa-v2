@@ -59,7 +59,7 @@ AppAsset::register($this);
                             ['label' => '<span class="fa fa-industry"></span> ' . Html::encode('Remiseria'), 'url' => ['/site/solicitud_registrar_agencia'],],
                         ],],
                         Yii::$app->user->isGuest ? (
-                            ['label' => '<span class="fa fa-user" id="loginButton" url="'.Url::toRoute('/site/login').'"></span> ' . Html::encode('Login')]
+                            ['label' => '<span class="glyphicon glyphicon-user"></span> ' . Html::encode('Sign in'), 'url' => ['/site/login'],'options' => ['id' => 'modalButtonLogin'],]
                         ) : (
                             '<li>'
                             . Html::beginForm(['/site/logout'], 'post', ['class' => 'navbar-form'])

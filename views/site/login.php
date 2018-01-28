@@ -6,6 +6,9 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use app\assets\LoginAsset;
+
+LoginAsset::register($this);
 
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
@@ -14,10 +17,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="row">
     <div class="col-lg-15">
-        <img src="img/avatarUser.png" id="img-avatar-login" alt="Logo P&aacute;gina" align="top" style="margin-left:40%;"/>
+        <img src="img/avatarUser.png" id="img-avatar-login"/>
         <h4>
             <strong>
-                <p style="text-align: center">Ingrese su usario y contrase&ntilde;a</p>
+                <p id="label-login">Ingrese su usuario y contrase&ntilde;a</p>
             </strong>
         </h4>
         <br />
@@ -39,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ])
         ?>
         <div class="form-group">
-            <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button', 'id' => 'btn-login-popup']) ?>
+            <?= Html::submitButton('Login', ['class' => 'btn input-block-level form-control btn-primary', 'name' => 'login-button', 'id' => 'btn-login-popup']) ?>
             <br>
             <h4>
                 <p id="mesagge-login">
