@@ -19,8 +19,8 @@ Modal::begin([
 echo "<div id='modalContent'></div>";
 Modal::end();
 ?>
-
 <div class="wrap" style="background-image:url(img/portada.jpg)">
+
     <br />
     <br />
     <br />
