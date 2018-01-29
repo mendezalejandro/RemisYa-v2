@@ -3,8 +3,8 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Roles;
-use app\models\SearchRoles;
+use app\models\Viajes;
+use app\models\SearchViajes;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,10 +12,11 @@ use \yii\web\Response;
 use yii\helpers\Html;
 
 /**
- * RolesController implements the CRUD actions for Roles model.
+ * ViajesController implements the CRUD actions for Viajes model.
  */
-class RolesController extends Controller
+class ViajesController extends Controller
 {
+    public $layout = 'main';
     /**
      * @inheritdoc
      */
@@ -33,29 +34,32 @@ class RolesController extends Controller
     }
 
     /**
-     * Lists all Roles models.
+     * Lists all Viajes models.
      * @return mixed
      */
-    public function actionIndexchofer()
-    {
-        $this->layout = "mainChofer";
-        return $this->render('indexChofer');
-    }
-    public function actionIndexrecepcionista()
+    public function actionIndex()
     {    
-        return $this->render('indexRecepcionista');
+        $searchModel = new SearchViajes();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
-    public function actionIndexadministrador()
+    public function actionChofer()
     {    
-        return $this->render('indexAdministrador');
-    }
-    public function actionIndexcliente()
-    {    
-        return $this->render('indexCliente');
+        $this->layout = 'mainChofer';
+        $searchModel = new SearchViajes();
+        $searchModel->ChoferID = Yii::$app->user->identity->PersonaID;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('chofer/index', [ //Corresponde al archivo views/viajes/chofer/index.php
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
     /**
-     * Displays a single Roles model.
+     * Displays a single Viajes model.
      * @param integer $id
      * @return mixed
      */
@@ -65,7 +69,7 @@ class RolesController extends Controller
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                    'title'=> "Roles #".$id,
+                    'title'=> "Viajes #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $this->findModel($id),
                     ]),
@@ -80,7 +84,7 @@ class RolesController extends Controller
     }
 
     /**
-     * Creates a new Roles model.
+     * Creates a new Viajes model.
      * For ajax request will return json object
      * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -88,7 +92,7 @@ class RolesController extends Controller
     public function actionCreate()
     {
         $request = Yii::$app->request;
-        $model = new Roles();  
+        $model = new Viajes();  
 
         if($request->isAjax){
             /*
@@ -97,7 +101,7 @@ class RolesController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Create new Roles",
+                    'title'=> "Create new Viajes",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
@@ -108,15 +112,15 @@ class RolesController extends Controller
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new Roles",
-                    'content'=>'<span class="text-success">Create Roles success</span>',
+                    'title'=> "Create new Viajes",
+                    'content'=>'<span class="text-success">Create Viajes success</span>',
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
         
                 ];         
             }else{           
                 return [
-                    'title'=> "Create new Roles",
+                    'title'=> "Create new Viajes",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
@@ -130,7 +134,7 @@ class RolesController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->RolID]);
+                return $this->redirect(['view', 'id' => $model->ViajeID]);
             } else {
                 return $this->render('create', [
                     'model' => $model,
@@ -141,7 +145,7 @@ class RolesController extends Controller
     }
 
     /**
-     * Updates an existing Roles model.
+     * Updates an existing Viajes model.
      * For ajax request will return json object
      * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
@@ -159,7 +163,7 @@ class RolesController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Update Roles #".$id,
+                    'title'=> "Update Viajes #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -169,7 +173,7 @@ class RolesController extends Controller
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Roles #".$id,
+                    'title'=> "Viajes #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $model,
                     ]),
@@ -178,7 +182,7 @@ class RolesController extends Controller
                 ];    
             }else{
                  return [
-                    'title'=> "Update Roles #".$id,
+                    'title'=> "Update Viajes #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -191,7 +195,7 @@ class RolesController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->RolID]);
+                return $this->redirect(['view', 'id' => $model->ViajeID]);
             } else {
                 return $this->render('update', [
                     'model' => $model,
@@ -201,7 +205,7 @@ class RolesController extends Controller
     }
 
     /**
-     * Delete an existing Roles model.
+     * Delete an existing Viajes model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -229,7 +233,7 @@ class RolesController extends Controller
     }
 
      /**
-     * Delete multiple existing Roles model.
+     * Delete multiple existing Viajes model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -260,15 +264,15 @@ class RolesController extends Controller
     }
 
     /**
-     * Finds the Roles model based on its primary key value.
+     * Finds the Viajes model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Roles the loaded model
+     * @return Viajes the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Roles::findOne($id)) !== null) {
+        if (($model = Viajes::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

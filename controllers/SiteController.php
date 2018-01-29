@@ -106,7 +106,22 @@ class SiteController extends Controller
     {
         return $this->render('index');
     }
+    // funciones para las vistas dependiendo el tipo de usuario
+    public function actionAdministrador() {
+        return $this->redirect(['agencia/index']);
+    }
 
+    public function actionRecepcionista() {
+        return $this->redirect(['recepcionista/index']);
+    }
+
+    public function actionChofer() {
+        return $this->redirect(['roles/indexchofer']);
+    }
+
+    public function actionCliente() {
+        return $this->redirect(['cliente/index']);
+    }
     /**
      * Login action.
      *

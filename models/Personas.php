@@ -3,6 +3,10 @@
 namespace app\models;
 
 use Yii;
+use yii\base\NotSupportedException;
+use yii\db\ActiveRecord;
+use yii\helpers\Security;
+use yii\web\IdentityInterface;
 
 /**
  * This is the model class for table "personas".
@@ -27,7 +31,7 @@ use Yii;
  * @property Viajes[] $viajes
  * @property Viajes[] $viajes0
  */
-class Personas extends \yii\db\ActiveRecord
+class Personas extends \yii\db\ActiveRecord implements IdentityInterface
 {
     /**
      * @inheritdoc
@@ -135,5 +139,69 @@ class Personas extends \yii\db\ActiveRecord
     public function getViajes0()
     {
         return $this->hasMany(Viajes::className(), ['PersonaID' => 'PersonaID']);
+    }
+
+    public static function findIdentity($id)
+    {
+        return self::findOne($id);
+    }
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        throw new \yii\base\NotSupportedException();
+    }
+
+    /**
+     * Finds user by username
+     *
+     * @param string $username
+     * @return static|null
+     */
+    public static function findByUsername($username)
+    {
+        return self::findOne(['Usuario'=>$username]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getId()
+    {
+        return $this->PersonaID;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getAuthKey()
+    {
+        //return $this->authKey;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function validateAuthKey($authKey)
+    {
+        //return $this->authKey === $authKey;
+    }
+
+    /**
+     * Validates password
+     *
+     * @param string $password password to validate
+     * @return bool if password provided is valid for current user
+     */
+    public function validatePassword($password)
+    {
+        if ($this->RolID==4 or $this->RolID==1){
+            if (hash_equals($this->Password, crypt($password, $this->Password))) {           //Compara el hash con el password ingresado, si son iguales devuelve true
+                return true;
+            }
+            else{
+                return false;
+            }
+        }else{
+            return $this->Password === $password;
+        }
     }
 }

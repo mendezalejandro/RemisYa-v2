@@ -3,8 +3,8 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Roles;
-use app\models\SearchRoles;
+use app\models\Calificaciones;
+use app\models\SearchCalificaciones;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,9 +12,9 @@ use \yii\web\Response;
 use yii\helpers\Html;
 
 /**
- * RolesController implements the CRUD actions for Roles model.
+ * CalificacionesController implements the CRUD actions for Calificaciones model.
  */
-class RolesController extends Controller
+class CalificacionesController extends Controller
 {
     /**
      * @inheritdoc
@@ -33,29 +33,23 @@ class RolesController extends Controller
     }
 
     /**
-     * Lists all Roles models.
+     * Lists all Calificaciones models.
      * @return mixed
      */
-    public function actionIndexchofer()
-    {
-        $this->layout = "mainChofer";
-        return $this->render('indexChofer');
-    }
-    public function actionIndexrecepcionista()
+    public function actionIndex()
     {    
-        return $this->render('indexRecepcionista');
-    }
-    public function actionIndexadministrador()
-    {    
-        return $this->render('indexAdministrador');
-    }
-    public function actionIndexcliente()
-    {    
-        return $this->render('indexCliente');
+        $searchModel = new SearchCalificaciones();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
+
     /**
-     * Displays a single Roles model.
+     * Displays a single Calificaciones model.
      * @param integer $id
      * @return mixed
      */
@@ -65,7 +59,7 @@ class RolesController extends Controller
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                    'title'=> "Roles #".$id,
+                    'title'=> "Calificaciones #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $this->findModel($id),
                     ]),
@@ -80,7 +74,7 @@ class RolesController extends Controller
     }
 
     /**
-     * Creates a new Roles model.
+     * Creates a new Calificaciones model.
      * For ajax request will return json object
      * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -88,7 +82,7 @@ class RolesController extends Controller
     public function actionCreate()
     {
         $request = Yii::$app->request;
-        $model = new Roles();  
+        $model = new Calificaciones();  
 
         if($request->isAjax){
             /*
@@ -97,7 +91,7 @@ class RolesController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Create new Roles",
+                    'title'=> "Create new Calificaciones",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
@@ -108,15 +102,15 @@ class RolesController extends Controller
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new Roles",
-                    'content'=>'<span class="text-success">Create Roles success</span>',
+                    'title'=> "Create new Calificaciones",
+                    'content'=>'<span class="text-success">Create Calificaciones success</span>',
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
         
                 ];         
             }else{           
                 return [
-                    'title'=> "Create new Roles",
+                    'title'=> "Create new Calificaciones",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
@@ -130,7 +124,7 @@ class RolesController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->RolID]);
+                return $this->redirect(['view', 'id' => $model->CalificacionID]);
             } else {
                 return $this->render('create', [
                     'model' => $model,
@@ -141,7 +135,7 @@ class RolesController extends Controller
     }
 
     /**
-     * Updates an existing Roles model.
+     * Updates an existing Calificaciones model.
      * For ajax request will return json object
      * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
@@ -159,7 +153,7 @@ class RolesController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Update Roles #".$id,
+                    'title'=> "Update Calificaciones #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -169,7 +163,7 @@ class RolesController extends Controller
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Roles #".$id,
+                    'title'=> "Calificaciones #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $model,
                     ]),
@@ -178,7 +172,7 @@ class RolesController extends Controller
                 ];    
             }else{
                  return [
-                    'title'=> "Update Roles #".$id,
+                    'title'=> "Update Calificaciones #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -191,7 +185,7 @@ class RolesController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->RolID]);
+                return $this->redirect(['view', 'id' => $model->CalificacionID]);
             } else {
                 return $this->render('update', [
                     'model' => $model,
@@ -201,7 +195,7 @@ class RolesController extends Controller
     }
 
     /**
-     * Delete an existing Roles model.
+     * Delete an existing Calificaciones model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -229,7 +223,7 @@ class RolesController extends Controller
     }
 
      /**
-     * Delete multiple existing Roles model.
+     * Delete multiple existing Calificaciones model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -260,15 +254,15 @@ class RolesController extends Controller
     }
 
     /**
-     * Finds the Roles model based on its primary key value.
+     * Finds the Calificaciones model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Roles the loaded model
+     * @return Calificaciones the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Roles::findOne($id)) !== null) {
+        if (($model = Calificaciones::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
