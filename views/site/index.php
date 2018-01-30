@@ -8,8 +8,6 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Url;
 use yii\bootstrap\Modal;
 use app\assets\AppAsset;
-raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
-AppAsset::register($this);
 
 
 Modal::begin([

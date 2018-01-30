@@ -22,7 +22,7 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css',
         //'css/grid.css',
-        //'css/mainPage.css',
+        'css/mainPage.css',
     ];
     public $js = [
         'js/modalShow.js',
