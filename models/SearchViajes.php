@@ -18,8 +18,8 @@ class SearchViajes extends Viajes
     public function rules()
     {
         return [
-            [['ViajeID', 'ChoferID', 'VehiculoID', 'TarifaID', 'TurnoID', 'AgenciaID', 'PersonaID', 'ViajeTipo', 'Estado'], 'integer'],
-            [['FechaEmision', 'FechaSalida', 'OrigenCoordenadas', 'DestinoCoordenadas', 'OrigenDireccion', 'DestinoDireccion', 'Comentario'], 'safe'],
+            [['ViajeID', 'ChoferID', 'TarifaID', 'TurnoID', 'AgenciaID',  'ViajeTipo', 'Estado'], 'integer'],
+            [['FechaEmision', 'VehiculoID','PersonaID','FechaSalida', 'OrigenCoordenadas', 'DestinoCoordenadas', 'OrigenDireccion', 'DestinoDireccion', 'Comentario'], 'safe'],
             [['ImporteTotal', 'Distancia'], 'number'],
         ];
     }
@@ -43,11 +43,12 @@ class SearchViajes extends Viajes
     public function search($params)
     {
         $query = Viajes::find();
-        $query->joinWith(['vehiculo']);
+        
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
+        $query->joinWith(['vehiculo']);
+        $query->joinWith(['persona']);
         $this->load($params);
 
         if (!$this->validate()) {
@@ -55,15 +56,13 @@ class SearchViajes extends Viajes
             // $query->where('0=1');
             return $dataProvider;
         }
-        
+
         $query->andFilterWhere([
             'ViajeID' => $this->ViajeID,
             'ChoferID' => $this->ChoferID,
-            'VehiculoID' => $this->VehiculoID,
             'TarifaID' => $this->TarifaID,
             'TurnoID' => $this->TurnoID,
             'AgenciaID' => $this->AgenciaID,
-            'PersonaID' => $this->PersonaID,
             'FechaEmision' => $this->FechaEmision,
             'FechaSalida' => $this->FechaSalida,
             'ViajeTipo' => $this->ViajeTipo,
@@ -77,7 +76,9 @@ class SearchViajes extends Viajes
             ->andFilterWhere(['like', 'OrigenDireccion', $this->OrigenDireccion])
             ->andFilterWhere(['like', 'DestinoDireccion', $this->DestinoDireccion])
             ->andFilterWhere(['like', 'Comentario', $this->Comentario])
-            ->andFilterWhere(['like', 'vehiculo.Marca', $this->VehiculoID]);
+            ->andFilterWhere(['like', 'Vehiculos.Marca', $this->VehiculoID])
+            ->andFilterWhere(['like', 'Personas.Nombre', $this->PersonaID]);
+            //->andFilterWhere(['like', 'Personas.Apellido', $this->PersonaID])
 
         return $dataProvider;
     }

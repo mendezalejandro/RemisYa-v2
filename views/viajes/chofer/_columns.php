@@ -8,13 +8,22 @@ return [
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'vehiculo.Marca',
+        'attribute'=>'VehiculoID',
+        'value'=>'vehiculo.Marca',
+        'label'=>'Vehiculo Marca',
     ],
      [
          'class'=>'\kartik\grid\DataColumn',
-         'attribute'=>'persona.Nombre',
-         'header'=>'Cliente',
+         'attribute'=>'PersonaID',
+         'value'=>'persona.Nombre',
+         'label'=>'Cliente Nombre',
      ],
+     /*[
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'PersonaID',
+        'value'=>'persona.Apellido',
+        'label'=>'Cliente Apellido',
+     ],*/
      [
          'class'=>'\kartik\grid\DataColumn',
          'attribute'=>'FechaSalida',
@@ -22,6 +31,20 @@ return [
      [
          'class'=>'\kartik\grid\DataColumn',
          'attribute'=>'ViajeTipo',
+         'value'=>function ($data){
+             $value;
+             switch($data->ViajeTipo) {
+                case 0:
+                    $value = "Web";
+                    break;
+                case 1:
+                    $value = "Personal";
+                    break;
+                case 2:
+                    $value = "Telefonico";
+                    break;
+                }
+             return $value;}            
      ],
      [
          'class'=>'\kartik\grid\DataColumn',
@@ -38,6 +61,23 @@ return [
      [
          'class'=>'\kartik\grid\DataColumn',
          'attribute'=>'Estado',
+         'value'=>function ($data){
+            $value;
+            switch($data->Estado) {
+               case 0:
+                   $value = "En viaje";
+                   break;
+               case 1:
+                   $value = "Solicitado";
+                   break;
+               case 2:
+                   $value = "Cancelado";
+                   break;
+                case 3:
+                   $value = "Finalizado";
+                   break;
+               }
+            return $value;}  
      ],
 
 ];   
