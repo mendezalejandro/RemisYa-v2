@@ -29,9 +29,9 @@ return [
          'attribute'=>'FechaSalida',
      ],
      [
-         'class'=>'\kartik\grid\DataColumn',
-         'attribute'=>'ViajeTipo',
-         'value'=>function ($data){
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'ViajeTipo',
+        'value'=>function ($data){
              $value;
              switch($data->ViajeTipo) {
                 case 0:
@@ -44,7 +44,9 @@ return [
                     $value = "Telefonico";
                     break;
                 }
-             return $value;}            
+             return $value;},
+        'filter' => [ 0 => 'Web', 1 => 'Personal', 2 => 'Telefonica',]
+         
      ],
      [
          'class'=>'\kartik\grid\DataColumn',
