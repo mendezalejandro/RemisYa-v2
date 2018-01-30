@@ -10,8 +10,7 @@ use yii\helpers\Url;
 use app\assets\AppAsset;
 
 //raoul2000\bootswatch\BootswatchAsset::$theme = 'Slate';
-//raoul2000\bootswatch\BootswatchAsset::$theme = 'Sandstone';
-raoul2000\bootswatch\BootswatchAsset::$theme = 'Simplex';
+raoul2000\bootswatch\BootswatchAsset::$theme = 'Sandstone';
 AppAsset::register($this);
 $this->title = 'Chofer';
 ?>
