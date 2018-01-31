@@ -73,8 +73,7 @@ $this->title = 'Chofer';
             ]);
             NavBar::end();
         ?>
-        <?=
-        Breadcrumbs::widget([
+        <?=Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ])
         ?>

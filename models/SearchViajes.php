@@ -68,7 +68,7 @@ class SearchViajes extends Viajes
             'ViajeTipo' => $this->ViajeTipo,
             'ImporteTotal' => $this->ImporteTotal,
             'Distancia' => $this->Distancia,
-            'Estado' => $this->Estado,
+            'Viajes.Estado' => $this->Estado, //Le pongo Viajes.Estado porque la columna es ambigua con el inner join a vehiculos.
         ]);
 
         $query->andFilterWhere(['like', 'OrigenCoordenadas', $this->OrigenCoordenadas])
@@ -77,8 +77,8 @@ class SearchViajes extends Viajes
             ->andFilterWhere(['like', 'DestinoDireccion', $this->DestinoDireccion])
             ->andFilterWhere(['like', 'Comentario', $this->Comentario])
             ->andFilterWhere(['like', 'Vehiculos.Marca', $this->VehiculoID])
-            ->andFilterWhere(['like', 'Personas.Nombre', $this->PersonaID]);
-            //->andFilterWhere(['like', 'Personas.Apellido', $this->PersonaID])
+            //->andFilterWhere(['like', 'Personas.Nombre', $this->PersonaID])
+            ->andFilterWhere(['like', 'Personas.Apellido', $this->PersonaID]);
 
         return $dataProvider;
     }

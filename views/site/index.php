@@ -9,7 +9,6 @@ use yii\helpers\Url;
 use yii\bootstrap\Modal;
 use app\assets\AppAsset;
 
-
 Modal::begin([
     'id' => 'modal',
     //'size' => 'modal-lg',

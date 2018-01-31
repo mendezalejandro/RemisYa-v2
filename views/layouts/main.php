@@ -73,8 +73,7 @@ AppAsset::register($this);
             ]);
             NavBar::end();
     ?>
-            <?=
-            Breadcrumbs::widget([
+            <?=Breadcrumbs::widget([
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ])
             ?>
@@ -87,8 +86,8 @@ AppAsset::register($this);
 
                 <span id="footer-copy-right" style="text-align:center"> 
                      <p class="copyright"><i class="fa fa-phone-square"></i> Contactenos: 001-000001010 &nbsp; &nbsp; &nbsp; &nbsp;&nbsp &nbsp;<i class="fa fa-envelope"></i> EmpresaRemisYa@gmail.com;
-&nbsp;&nbsp; P&aacute;gina de prueba &nbsp;- &nbsp;&nbsp;</p>
-               <!--     <i class="fa fa-phone-square"></i> -->-
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; P&aacute;gina de prueba &nbsp; &nbsp;&nbsp;</p>
+               <!--     <i class="fa fa-phone-square"></i> -->
                 </span>
             </div>
         </footer>

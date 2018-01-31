@@ -23,6 +23,7 @@ body {
 
 .jumbotron {
     text-align: center;
+    color: hsl(0, 1%, 78%);
     background-color: transparent;
 }
 

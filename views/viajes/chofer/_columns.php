@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Url;
-
+include \Yii::$app->basePath.'/models/Constantes.php';
 return [
     [
         'class' => 'kartik\grid\SerialColumn',
@@ -12,18 +12,18 @@ return [
         'value'=>'vehiculo.Marca',
         'label'=>'Vehiculo Marca',
     ],
-     [
+     /*[
          'class'=>'\kartik\grid\DataColumn',
          'attribute'=>'PersonaID',
          'value'=>'persona.Nombre',
          'label'=>'Cliente Nombre',
-     ],
-     /*[
+     ],*/
+     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'PersonaID',
         'value'=>'persona.Apellido',
         'label'=>'Cliente Apellido',
-     ],*/
+     ],
      [
          'class'=>'\kartik\grid\DataColumn',
          'attribute'=>'FechaSalida',
@@ -34,19 +34,19 @@ return [
         'value'=>function ($data){
              $value;
              switch($data->ViajeTipo) {
-                case 0:
+                case TipoViaje::Web:
                     $value = "Web";
                     break;
-                case 1:
+                case TipoViaje::Personal:
                     $value = "Personal";
                     break;
-                case 2:
+                case TipoViaje::Telefonico:
                     $value = "Telefonico";
                     break;
                 }
              return $value;},
-        'filter' => [ 0 => 'Web', 1 => 'Personal', 2 => 'Telefonica',]
-         
+        'filter' => [ TipoViaje::Web => 'Web', TipoViaje::Personal => 'Personal', TipoViaje::Telefonico => 'Telefonico',],
+         'label'=>'Tipo de viaje',
      ],
      [
          'class'=>'\kartik\grid\DataColumn',
@@ -66,20 +66,21 @@ return [
          'value'=>function ($data){
             $value;
             switch($data->Estado) {
-               case 0:
+               case ViajeEstado::En_viaje:
                    $value = "En viaje";
                    break;
-               case 1:
+               case ViajeEstado::Solicitado:
                    $value = "Solicitado";
                    break;
-               case 2:
+               case ViajeEstado::Cancelado:
                    $value = "Cancelado";
                    break;
-                case 3:
+                case ViajeEstado::Finalizado:
                    $value = "Finalizado";
                    break;
                }
-            return $value;}  
+            return $value;}  ,
+            'filter' => [ViajeEstado::En_viaje => 'En viaje', ViajeEstado::Solicitado => 'Solicitado', ViajeEstado::Cancelado => 'Cancelado',ViajeEstado::Finalizado => 'Finalizado'],
      ],
 
 ];   

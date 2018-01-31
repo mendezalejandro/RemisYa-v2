@@ -1,0 +1,13 @@
+.modal-header
+{
+    background-color: #3e3f3a;
+}
+.modal-content
+{
+    background-color: none;
+    border: 2px solid #333;
+}
+.modal-title
+{
+    color: #777;
+}
