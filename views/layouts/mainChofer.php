@@ -9,7 +9,8 @@ use yii\widgets\Breadcrumbs;
 use yii\helpers\Url;
 use app\assets\AppAsset;
 
-raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';
+//raoul2000\bootswatch\BootswatchAsset::$theme = 'Slate';
+raoul2000\bootswatch\BootswatchAsset::$theme = 'Sandstone';
 AppAsset::register($this);
 $this->title = 'Chofer';
 ?>
