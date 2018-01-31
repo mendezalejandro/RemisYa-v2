@@ -9,7 +9,7 @@ class TipoUsuario
 {
     public $rolID;
 
-    public static function usuarioAdministrador($rolID){
+    public static function esAdministrador($rolID){
         if ($rolID == 1){
             return true;
         }
@@ -17,7 +17,7 @@ class TipoUsuario
             return false;
         }
     }
-    public static function usuarioRecepcionista($rolID){
+    public static function esRecepcionista($rolID){
         if($rolID ==2){
             return true;
         }
@@ -26,7 +26,7 @@ class TipoUsuario
         }
 
     }
-    public static function usuarioChofer($rolID){
+    public static function esChofer($rolID){
         if($rolID ==3){
             return true;
         }
@@ -34,7 +34,7 @@ class TipoUsuario
             return false;
         }
     }
-    public static function usuarioCliente($rolID){
+    public static function esCliente($rolID){
         if($rolID == 4){
             return true;
         }
