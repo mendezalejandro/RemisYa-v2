@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers\chofer;
+namespace app\controllers\administrador;
 
 use Yii;
 use app\models\Roles;
@@ -16,7 +16,7 @@ use yii\helpers\Html;
  */
 class IndexController extends Controller
 {
-    public $layout = "mainChofer";
+    public $layout = "mainAdministrador";
     /**
      * @inheritdoc
      */
@@ -39,6 +39,6 @@ class IndexController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('indexChofer');
+        return $this->render('indexAdministrador');
     }
 }

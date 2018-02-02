@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;
+namespace app\controllers\administrador;
 
 use Yii;
 use app\models\Agencias;
@@ -16,6 +16,7 @@ use yii\helpers\Html;
  */
 class AgenciasController extends Controller
 {
+    public $layout = "mainAdministrador";
     /**
      * @inheritdoc
      */

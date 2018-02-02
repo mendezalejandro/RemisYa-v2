@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;
+namespace app\controllers\administrador;
 
 use Yii;
 use app\models\Viajes;
@@ -16,7 +16,7 @@ use yii\helpers\Html;
  */
 class ViajesController extends Controller
 {
-    public $layout = 'main';
+    public $layout = "mainAdministrador";
     /**
      * @inheritdoc
      */

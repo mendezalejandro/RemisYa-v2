@@ -108,7 +108,7 @@ class SiteController extends Controller
     }
     // funciones para las vistas dependiendo el tipo de usuario
     public function actionAdministrador() {
-        return $this->redirect(['agencia/index']);
+        return $this->redirect(['administrador/index/index']);
     }
 
     public function actionRecepcionista() {
