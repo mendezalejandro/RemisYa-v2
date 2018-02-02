@@ -3,14 +3,14 @@
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Usuarios */
+/* @var $model app\models\Personas */
 ?>
-<div class="usuarios-view">
+<div class="personas-view">
  
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'UsuarioID',
+            'PersonaID',
             'Usuario',
             'Password',
             'Telefono',

@@ -2,13 +2,13 @@
 
 use yii\helpers\Html;
 
-
 /* @var $this yii\web\View */
-/* @var $model app\models\Usuarios */
-
+/* @var $model app\models\tarifas */
 ?>
-<div class="usuarios-create">
+<div class="tarifas-update">
+
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
+
 </div>

@@ -3,9 +3,9 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Usuarios */
+/* @var $model app\models\tarifas */
 ?>
-<div class="usuarios-update">
+<div class="tarifas-update">
 
     <?= $this->render('_form', [
         'model' => $model,

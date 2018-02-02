@@ -1,10 +1,14 @@
 <?php
 use yii\helpers\Url;
-
+include \Yii::$app->basePath.'/models/Constantes.php';
 return [
     [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
+    ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'Usuario',
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
@@ -16,30 +20,38 @@ return [
      ],
     [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'Usuario',
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Telefono',
     ],
     [
          'class'=>'\kartik\grid\DataColumn',
          'attribute'=>'Email',
      ],
-
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'Documento',
-    // ],
-    // 
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'RolID',
-    // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'Estado',
-    // ],
+     [
+         'class'=>'\kartik\grid\DataColumn',
+         'attribute'=>'Documento',
+     ],
+     [
+         'class'=>'\kartik\grid\DataColumn',
+         'attribute'=>'RolID',
+         'value'=>'rol.Descripcion',
+         'label'=>'Rol',
+         'filter' => [ TipoUsuario::Administrador => 'Administrador', TipoUsuario::Recepcionista => 'Recepcionista', TipoUsuario::Chofer => 'Chofer'],
+     ],
+     [
+         'class'=>'\kartik\grid\DataColumn',
+         'attribute'=>'Estado',
+         'value'=>function ($model){
+            switch($model->Estado) {
+               case PersonaEstado::Habilitado:
+                   $value = "Habilitado";
+                   break;
+                   case PersonaEstado::Deshabilitado:
+                   $value = "Deshabilitado";
+                   break;
+               }
+            return $value;},
+         'filter' => [ PersonaEstado::Habilitado => 'Habilitado', PersonaEstado::Deshabilitado => 'Deshabilitado'],
+     ],
     [
         'class' => 'kartik\grid\ActionColumn',
         'dropdown' => false,

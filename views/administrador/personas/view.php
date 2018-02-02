@@ -1,7 +1,7 @@
 <?php
 
 use yii\widgets\DetailView;
-
+include \Yii::$app->basePath.'/models/Constantes.php';
 /* @var $this yii\web\View */
 /* @var $model app\models\Personas */
 ?>
@@ -18,8 +18,20 @@ use yii\widgets\DetailView;
             'Apellido',
             'Documento',
             'Email:email',
-            'RolID',
-            'Estado',
+            ['label' => 'Rol','value' => $model->rol->Descripcion,],
+            ['label' => 'Estado',
+            
+            'value'=>function ($model){
+                    switch($model->Estado) {
+                       case PersonaEstado::Habilitado:
+                           $value = "Habilitado";
+                           break;
+                           case PersonaEstado::Deshabilitado:
+                           $value = "Deshabilitado";
+                           break;
+                       }
+                    return $value;},
+            ],
         ],
     ]) ?>
 

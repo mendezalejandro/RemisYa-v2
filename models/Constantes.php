@@ -19,3 +19,8 @@ class TipoUsuario
       const Cancelado = 2;
       const Finalizado = 3;
   }
+  class PersonaEstado
+  {
+      const Habilitado = 0;
+      const Deshabilitado = 1;
+  }
