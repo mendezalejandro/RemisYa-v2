@@ -49,12 +49,12 @@ $this->title = 'Chofer';
                 'items' => [
                     ['label' => '<span class="fa fa-suitcase"></span> ' . Html::encode('Viajes'),
                         'items' => [
-                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Historial de viajes'), 'url' => ['/viajes/chofer'],], //Llama a la action actionChofer en ViajesController
+                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Historial de viajes'), 'url' => ['/chofer/viajes/index'],], //Llama a la action actionIndex en controllers/chofer/ViajesController
     
                      ],
                     ],
                     ['label' => '<span class="fa fa-star"></span> ' . Html::encode('Calificaciones'), 'items' => [
-                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Ver Historial'), 'url' => ['/chofer/lista_historial_calificaciones'],],
+                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Calificaciones'), 'url' => ['/chofer/calificaciones/index'],],
                         ],
                     ],
         

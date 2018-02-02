@@ -116,7 +116,7 @@ class SiteController extends Controller
     }
 
     public function actionChofer() {
-        return $this->redirect(['roles/indexchofer']);
+        return $this->redirect(['chofer/index/index']);
     }
 
     public function actionCliente() {

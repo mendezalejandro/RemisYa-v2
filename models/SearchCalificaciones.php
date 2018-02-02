@@ -18,8 +18,8 @@ class SearchCalificaciones extends Calificaciones
     public function rules()
     {
         return [
-            [['CalificacionID', 'ViajeID', 'Quien', 'ParaQuien', 'Puntaje', 'AgenciaID'], 'integer'],
-            [['Fecha', 'Comentario'], 'safe'],
+            [['CalificacionID', 'ViajeID', 'ParaQuien', 'Puntaje', 'AgenciaID'], 'integer'],
+            [['Fecha', 'Comentario', 'Quien'], 'safe'],
         ];
     }
 
@@ -54,18 +54,18 @@ class SearchCalificaciones extends Calificaciones
             // $query->where('0=1');
             return $dataProvider;
         }
-
+        $query->joinWith(['quien']);
         $query->andFilterWhere([
             'CalificacionID' => $this->CalificacionID,
             'ViajeID' => $this->ViajeID,
-            'Quien' => $this->Quien,
             'ParaQuien' => $this->ParaQuien,
             'Puntaje' => $this->Puntaje,
             'Fecha' => $this->Fecha,
             'AgenciaID' => $this->AgenciaID,
         ]);
 
-        $query->andFilterWhere(['like', 'Comentario', $this->Comentario]);
+        $query->andFilterWhere(['like', 'Comentario', $this->Comentario])
+                ->andFilterWhere(['like', 'Personas.Apellido', $this->Quien]);
 
         return $dataProvider;
     }

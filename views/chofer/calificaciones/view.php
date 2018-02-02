@@ -10,14 +10,13 @@ use yii\widgets\DetailView;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'CalificacionID',
             'ViajeID',
-            'Quien',
-            'ParaQuien',
+            ['label' => 'Cliente','value' => $model->quien->Apellido,],
+            ['label' => 'Chofer','value' => $model->paraQuien->Apellido,],
             'Puntaje',
             'Fecha',
             'Comentario',
-            'AgenciaID',
+            ['label' => 'Agencia','value' => $model->agencia->Nombre,],
         ],
     ]) ?>
 

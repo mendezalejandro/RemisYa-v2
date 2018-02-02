@@ -26,8 +26,6 @@ CrudAsset::register($this);
             'columns' => require(__DIR__.'/_columns.php'),
             'toolbar'=> [
                 ['content'=>
-                    Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'],
-                    ['role'=>'modal-remote','title'=> 'Crear Calificaciones','class'=>'btn btn-default']).
                     Html::a('<i class="glyphicon glyphicon-repeat"></i>', [''],
                     ['data-pjax'=>1, 'class'=>'btn btn-default', 'title'=>'Resetear grilla']).
                     '{toggleData}'.
@@ -46,7 +44,7 @@ CrudAsset::register($this);
                 'type' => 'primary', 
                 'heading' => '<i class="glyphicon glyphicon-list"></i> Calificaciones ',
                 'before'=>'<em></em>',
-            ]
+            ],
         ])?>
     </div>
 </div>
