@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+include \Yii::$app->basePath.'/models/Constantes.php';
 /* @var $this yii\web\View */
 /* @var $model app\models\tarifas */
 /* @var $form yii\widgets\ActiveForm */
@@ -13,15 +13,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Comision')->textInput() ?>
 
-    <?= $form->field($model, 'AgenciaID')->textInput() ?>
-
     <?= $form->field($model, 'ViajeMinimo')->textInput() ?>
 
     <?= $form->field($model, 'KmMinimo')->textInput() ?>
 
     <?= $form->field($model, 'PrecioKM')->textInput() ?>
 
-    <?= $form->field($model, 'Estado')->textInput() ?>
+    <?= $form->field($model, 'Estado')->dropDownList(['prompt' => 'Seleccione un estado',TarifaEstado::Habilitada => 'Habilitada', TarifaEstado::Deshabilitada => 'Deshabilitada']) ?>
 
   
 	<?php if (!Yii::$app->request->isAjax){ ?>

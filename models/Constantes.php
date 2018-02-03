@@ -29,3 +29,8 @@ class TipoUsuario
       const Habilitado = 0;
       const Deshabilitado = 1;
   }
+  class TarifaEstado
+  {
+      const Habilitada = 0;
+      const Deshabilitada = 1;
+  }

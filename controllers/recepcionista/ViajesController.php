@@ -16,7 +16,7 @@ use yii\helpers\Html;
  */
 class ViajesController extends Controller
 {
-    public $layout = 'main';
+    public $layout = "mainRecepcionista";
     /**
      * @inheritdoc
      */
@@ -42,17 +42,6 @@ class ViajesController extends Controller
         $searchModel = new SearchViajes();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-    public function actionChofer()
-    {    
-        $this->layout = 'mainChofer';
-        $searchModel = new SearchViajes();
-        $searchModel->ChoferID = Yii::$app->user->identity->PersonaID;
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        return $this->render('chofer/index', [ //Corresponde al archivo views/viajes/chofer/index.php
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

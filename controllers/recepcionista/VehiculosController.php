@@ -16,6 +16,7 @@ use yii\helpers\Html;
  */
 class VehiculosController extends Controller
 {
+    public $layout = "mainRecepcionista";
     /**
      * @inheritdoc
      */

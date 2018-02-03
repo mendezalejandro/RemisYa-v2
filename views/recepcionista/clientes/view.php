@@ -3,25 +3,29 @@
 use yii\widgets\DetailView;
 include \Yii::$app->basePath.'/models/Constantes.php';
 /* @var $this yii\web\View */
-/* @var $model app\models\tarifas */
+/* @var $model app\models\Personas */
 ?>
-<div class="tarifas-view">
+<div class="personas-view">
  
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'Comision',
-            'ViajeMinimo',
-            'KmMinimo',
-            'PrecioKM',
+            'Usuario',
+            'Password',
+            'Telefono',
+            'Nombre',
+            'Apellido',
+            'Documento',
+            'Email:email',
             ['label' => 'Estado',
+            
             'value'=>function ($model){
                     switch($model->Estado) {
-                       case TarifaEstado::Habilitada:
-                           $value = "Habilitada";
+                       case PersonaEstado::Habilitado:
+                           $value = "Habilitado";
                            break;
-                           case TarifaEstado::Deshabilitada:
-                           $value = "Deshabilitada";
+                           case PersonaEstado::Deshabilitado:
+                           $value = "Deshabilitado";
                            break;
                        }
                     return $value;},

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;
+namespace app\controllers\recepcionista;
 
 use Yii;
 use app\models\tarifas;
@@ -16,6 +16,7 @@ use yii\helpers\Html;
  */
 class TarifasController extends Controller
 {
+    public $layout = "mainRecepcionista";
     /**
      * @inheritdoc
      */
@@ -59,7 +60,7 @@ class TarifasController extends Controller
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                    'title'=> "tarifas #".$id,
+                    'title'=> "Tarifa #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $this->findModel($id),
                     ]),
@@ -83,7 +84,7 @@ class TarifasController extends Controller
     {
         $request = Yii::$app->request;
         $model = new tarifas();  
-
+        $model->AgenciaID = Yii::$app->user->identity->agencia;
         if($request->isAjax){
             /*
             *   Process for ajax request

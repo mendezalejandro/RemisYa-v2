@@ -58,7 +58,7 @@ class SearchTarifas extends tarifas
         $query->andFilterWhere([
             'TarifaID' => $this->TarifaID,
             'Comision' => $this->Comision,
-            'AgenciaID' => $this->AgenciaID,
+            'AgenciaID' => Yii::$app->user->identity->agencia,
             'ViajeMinimo' => $this->ViajeMinimo,
             'KmMinimo' => $this->KmMinimo,
             'PrecioKM' => $this->PrecioKM,

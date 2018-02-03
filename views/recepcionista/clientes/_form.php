@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+include \Yii::$app->basePath.'/models/Constantes.php';
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Personas */
@@ -25,10 +26,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'Email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'RolID')->textInput() ?>
-
-    <?= $form->field($model, 'Estado')->textInput() ?>
-
+    <?= $form->field($model, 'Estado')->dropDownList(['prompt' => 'Seleccione un estado',PersonaEstado::Habilitado => 'Habilitado', PersonaEstado::Deshabilitado => 'Deshabilitado']) ?>
   
 	<?php if (!Yii::$app->request->isAjax){ ?>
 	  	<div class="form-group">

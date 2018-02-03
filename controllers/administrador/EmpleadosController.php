@@ -93,7 +93,7 @@ class EmpleadosController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Create new Empleado",
+                    'title'=> "Crear Empleado",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
@@ -108,15 +108,15 @@ class EmpleadosController extends Controller
                 $model->link('agenciaspersonas', $agenciaPersona);
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new Empleado",
-                    'content'=>'<span class="text-success">Create Personas success</span>',
+                    'title'=> "Crear Empleado",
+                    'content'=>'<span class="text-success">Empleado creado con exito!</span>',
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
         
                 ];         
             }else{           
                 return [
-                    'title'=> "Create new Personas",
+                    'title'=> "Crear Empleado",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
@@ -158,7 +158,7 @@ class EmpleadosController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Update Empleado #".$id,
+                    'title'=> "Modificar Empleado #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -168,7 +168,7 @@ class EmpleadosController extends Controller
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Personas #".$id,
+                    'title'=> "Empleado #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $model,
                     ]),
@@ -177,7 +177,7 @@ class EmpleadosController extends Controller
                 ];    
             }else{
                  return [
-                    'title'=> "Update Empleado #".$id,
+                    'title'=> "Modificar Empleado #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -197,11 +197,6 @@ class EmpleadosController extends Controller
                 ]);
             }
         }
-    }
-    public function beforeDelete()
-    {
-
-        return parent::beforeDelete();
     }
     /**
      * Delete an existing Personas model.

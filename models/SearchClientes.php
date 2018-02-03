@@ -10,7 +10,7 @@ use app\models\Personas;
 /**
  * SearchPersonas represents the model behind the search form about `app\models\Personas`.
  */
-class SearchEmpleados extends Personas
+class SearchClientes extends Personas
 {
     const Administrador = 1;
     const Recepcionista = 2;
@@ -62,12 +62,10 @@ class SearchEmpleados extends Personas
 
         $query->andFilterWhere([
             'PersonaID' => $this->PersonaID,
-            'RolID' => $this->RolID,
+            'RolID' => self::Cliente,
             'Personas.Estado' => $this->Estado,
             'Agencias.AgenciaID' => Yii::$app->user->identity->agencia,
         ]);
-        //Para la grilla de Empleados del administrador traigo todos los usuarios de la agencia y que nos son Clientes.
-        $query->andFilterWhere(['<>','RolID',self::Cliente]); 
 
         $query->andFilterWhere(['like', 'Usuario', $this->Usuario])
             ->andFilterWhere(['like', 'Password', $this->Password])

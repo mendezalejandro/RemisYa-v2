@@ -1,10 +1,11 @@
 <?php
 
-namespace app\controllers;
+namespace app\controllers\recepcionista;
 
 use Yii;
-use app\models\Calificaciones;
-use app\models\SearchCalificaciones;
+use app\models\Personas;
+use app\models\AgenciasPersonas;
+use app\models\SearchClientes;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,10 +13,12 @@ use \yii\web\Response;
 use yii\helpers\Html;
 
 /**
- * CalificacionesController implements the CRUD actions for Calificaciones model.
+ * PersonasController implements the CRUD actions for Personas model.
  */
-class CalificacionesController extends Controller
+class ClientesController extends Controller
 {
+    const Cliente = 4;
+    public $layout = "mainRecepcionista";
     /**
      * @inheritdoc
      */
@@ -33,12 +36,12 @@ class CalificacionesController extends Controller
     }
 
     /**
-     * Lists all Calificaciones models.
+     * Lists all Personas models.
      * @return mixed
      */
     public function actionIndex()
     {    
-        $searchModel = new SearchCalificaciones();
+        $searchModel = new SearchClientes();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -49,7 +52,7 @@ class CalificacionesController extends Controller
 
 
     /**
-     * Displays a single Calificaciones model.
+     * Displays a single Personas model.
      * @param integer $id
      * @return mixed
      */
@@ -59,7 +62,7 @@ class CalificacionesController extends Controller
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                    'title'=> "Calificaciones #".$id,
+                    'title'=> "Cliente #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $this->findModel($id),
                     ]),
@@ -74,7 +77,7 @@ class CalificacionesController extends Controller
     }
 
     /**
-     * Creates a new Calificaciones model.
+     * Creates a new Personas model.
      * For ajax request will return json object
      * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -82,8 +85,8 @@ class CalificacionesController extends Controller
     public function actionCreate()
     {
         $request = Yii::$app->request;
-        $model = new Calificaciones();  
-
+        $model = new Personas();  
+        $model->RolID = self::Cliente;
         if($request->isAjax){
             /*
             *   Process for ajax request
@@ -91,7 +94,7 @@ class CalificacionesController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Create new Calificaciones",
+                    'title'=> "Crear Cliente",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
@@ -100,17 +103,22 @@ class CalificacionesController extends Controller
         
                 ];         
             }else if($model->load($request->post()) && $model->save()){
+                $agenciaPersona = new AgenciasPersonas();
+                $agenciaPersona->load($request->post());
+                $agenciaPersona->AgenciaID = Yii::$app->user->identity->agencia;
+                $model->link('agenciaspersonas', $agenciaPersona);
+
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new Calificaciones",
-                    'content'=>'<span class="text-success">Create Calificaciones success</span>',
+                    'title'=> "Crear Cliente",
+                    'content'=>'<span class="text-success">Cliente creado exitosamente</span>',
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
         
                 ];         
             }else{           
                 return [
-                    'title'=> "Create new Calificaciones",
+                    'title'=> "Crear Cliente",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
@@ -124,7 +132,7 @@ class CalificacionesController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->CalificacionID]);
+                return $this->redirect(['view', 'id' => $model->PersonaID]);
             } else {
                 return $this->render('create', [
                     'model' => $model,
@@ -135,7 +143,7 @@ class CalificacionesController extends Controller
     }
 
     /**
-     * Updates an existing Calificaciones model.
+     * Updates an existing Personas model.
      * For ajax request will return json object
      * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
@@ -153,7 +161,7 @@ class CalificacionesController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Update Calificaciones #".$id,
+                    'title'=> "Modificar Cliente #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -163,7 +171,7 @@ class CalificacionesController extends Controller
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Calificaciones #".$id,
+                    'title'=> "Cliente #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $model,
                     ]),
@@ -172,7 +180,7 @@ class CalificacionesController extends Controller
                 ];    
             }else{
                  return [
-                    'title'=> "Update Calificaciones #".$id,
+                    'title'=> "Modificar Cliente #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -185,7 +193,7 @@ class CalificacionesController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->CalificacionID]);
+                return $this->redirect(['view', 'id' => $model->PersonaID]);
             } else {
                 return $this->render('update', [
                     'model' => $model,
@@ -195,7 +203,7 @@ class CalificacionesController extends Controller
     }
 
     /**
-     * Delete an existing Calificaciones model.
+     * Delete an existing Personas model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -204,7 +212,11 @@ class CalificacionesController extends Controller
     public function actionDelete($id)
     {
         $request = Yii::$app->request;
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        foreach($model->agenciaspersonas as $q)
+        $q->delete();
+
+        $model->delete();
 
         if($request->isAjax){
             /*
@@ -223,7 +235,7 @@ class CalificacionesController extends Controller
     }
 
      /**
-     * Delete multiple existing Calificaciones model.
+     * Delete multiple existing Personas model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -254,15 +266,15 @@ class CalificacionesController extends Controller
     }
 
     /**
-     * Finds the Calificaciones model based on its primary key value.
+     * Finds the Personas model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Calificaciones the loaded model
+     * @return Personas the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Calificaciones::findOne($id)) !== null) {
+        if (($model = Personas::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
