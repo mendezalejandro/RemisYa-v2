@@ -93,6 +93,11 @@ class Personas extends \yii\db\ActiveRecord implements IdentityInterface
         return $this->hasMany(Agencias::className(), ['AgenciaID' => 'AgenciaID'])->viaTable('agenciaspersonas', ['PersonaID' => 'PersonaID']);
     }
 
+    public function getAgencia()
+    {
+        return $this->agencias[0]->AgenciaID;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

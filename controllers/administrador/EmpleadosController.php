@@ -4,7 +4,8 @@ namespace app\controllers\administrador;
 
 use Yii;
 use app\models\Personas;
-use app\models\SearchPersonas;
+use app\models\AgenciasPersonas;
+use app\models\SearchEmpleados;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,9 +13,9 @@ use \yii\web\Response;
 use yii\helpers\Html;
 
 /**
- * PersonasController implements the CRUD actions for Personas model.
+ * EmpleadosController implements the CRUD actions for Personas model.
  */
-class PersonasController extends Controller
+class EmpleadosController extends Controller
 {
     public $layout = "mainAdministrador";
     /**
@@ -39,7 +40,7 @@ class PersonasController extends Controller
      */
     public function actionIndex()
     {    
-        $searchModel = new SearchPersonas();
+        $searchModel = new SearchEmpleados();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -60,7 +61,7 @@ class PersonasController extends Controller
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                    'title'=> "Personas #".$id,
+                    'title'=> "Empleados #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $this->findModel($id),
                     ]),
@@ -92,7 +93,7 @@ class PersonasController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Create new Personas",
+                    'title'=> "Create new Empleado",
                     'content'=>$this->renderAjax('create', [
                         'model' => $model,
                     ]),
@@ -101,9 +102,13 @@ class PersonasController extends Controller
         
                 ];         
             }else if($model->load($request->post()) && $model->save()){
+                $agenciaPersona = new AgenciasPersonas();
+                $agenciaPersona->load($request->post());
+                $agenciaPersona->AgenciaID = Yii::$app->user->identity->agencia;
+                $model->link('agenciaspersonas', $agenciaPersona);
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new Personas",
+                    'title'=> "Create new Empleado",
                     'content'=>'<span class="text-success">Create Personas success</span>',
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
@@ -146,7 +151,6 @@ class PersonasController extends Controller
     {
         $request = Yii::$app->request;
         $model = $this->findModel($id);       
-
         if($request->isAjax){
             /*
             *   Process for ajax request
@@ -154,7 +158,7 @@ class PersonasController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Update Personas #".$id,
+                    'title'=> "Update Empleado #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -173,7 +177,7 @@ class PersonasController extends Controller
                 ];    
             }else{
                  return [
-                    'title'=> "Update Personas #".$id,
+                    'title'=> "Update Empleado #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -194,7 +198,11 @@ class PersonasController extends Controller
             }
         }
     }
+    public function beforeDelete()
+    {
 
+        return parent::beforeDelete();
+    }
     /**
      * Delete an existing Personas model.
      * For ajax request will return json object
@@ -205,7 +213,11 @@ class PersonasController extends Controller
     public function actionDelete($id)
     {
         $request = Yii::$app->request;
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        foreach($model->agenciaspersonas as $q)
+        $q->delete();
+
+        $model->delete();
 
         if($request->isAjax){
             /*

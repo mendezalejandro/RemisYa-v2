@@ -50,7 +50,7 @@ $this->title = 'Administrador';
                     [
                         'label' => '<span class="fa fa-user-plus"></span> ' . Html::encode('Empleados'),
                         'items' => [
-                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Administrar'), 'url' => ['administrador/personas/index'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
+                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Administrar'), 'url' => ['administrador/empleados/index'], 'data-toggle' => 'dropdown', 'class' => 'dropdown-toggle'],
                         ],
                     ],
                     [
