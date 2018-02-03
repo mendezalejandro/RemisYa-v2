@@ -24,3 +24,8 @@ class TipoUsuario
       const Habilitado = 0;
       const Deshabilitado = 1;
   }
+  class VehiculoEstado
+  {
+      const Habilitado = 0;
+      const Deshabilitado = 1;
+  }

@@ -1,98 +1,98 @@
 <?php
 use yii\helpers\Url;
-
+use app\models\Personas;
+include \Yii::$app->basePath.'/models/Constantes.php';
 return [
     [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
     ],
-        [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'ViajeID',
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'ChoferID',
-    ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'VehiculoID',
+        'value'=>'vehiculo.Marca',
+        'label'=>'Vehiculo Marca',
     ],
-    [
+     [
+         'class'=>'\kartik\grid\DataColumn',
+         'attribute'=>'ChoferID',
+         'value'=>function ($model){return $model->chofer->Nombre. ' '. $model->chofer->Apellido;},
+         'label'=>'Chofer',
+         'filter' => \yii\helpers\ArrayHelper::map(Personas::find()->joinWith(['agencias'])->andFilterWhere(['=', 'RolID', TipoUsuario::Chofer])->andWhere(['=', 'Agencias.AgenciaID', Yii::$app->user->identity->agencia])->all(), 'PersonaID', 'Apellido'),
+     ],
+     [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'TarifaID',
-    ],
-    [
+        'attribute'=>'PersonaID',
+        'value'=>'persona.Apellido',
+        'label'=>'Cliente Apellido',
+     ],
+     [
+         'class'=>'\kartik\grid\DataColumn',
+         'attribute'=>'FechaSalida',
+     ],
+     [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'TurnoID',
-    ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'AgenciaID',
-    // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'PersonaID',
-    // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'FechaEmision',
-    // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'FechaSalida',
-    // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'ViajeTipo',
-    // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'OrigenCoordenadas',
-    // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'DestinoCoordenadas',
-    // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'OrigenDireccion',
-    // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'DestinoDireccion',
-    // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'Comentario',
-    // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'ImporteTotal',
-    // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'Distancia',
-    // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'Estado',
-    // ],
-    [
+        'attribute'=>'ViajeTipo',
+        'value'=>function ($data){
+             $value;
+             switch($data->ViajeTipo) {
+                case TipoViaje::Web:
+                    $value = "Web";
+                    break;
+                case TipoViaje::Personal:
+                    $value = "Personal";
+                    break;
+                case TipoViaje::Telefonico:
+                    $value = "Telefonico";
+                    break;
+                }
+             return $value;},
+        'filter' => [ TipoViaje::Web => 'Web', TipoViaje::Personal => 'Personal', TipoViaje::Telefonico => 'Telefonico',],
+         'label'=>'Tipo de viaje',
+     ],
+     [
+         'class'=>'\kartik\grid\DataColumn',
+         'attribute'=>'DestinoDireccion',
+     ],
+     [
+         'class'=>'\kartik\grid\DataColumn',
+         'attribute'=>'ImporteTotal',
+     ],
+     [
+         'class'=>'\kartik\grid\DataColumn',
+         'attribute'=>'Distancia',
+     ],
+     [
+         'class'=>'\kartik\grid\DataColumn',
+         'attribute'=>'Estado',
+         'value'=>function ($data){
+            $value;
+            switch($data->Estado) {
+               case ViajeEstado::En_viaje:
+                   $value = "En viaje";
+                   break;
+               case ViajeEstado::Solicitado:
+                   $value = "Solicitado";
+                   break;
+               case ViajeEstado::Cancelado:
+                   $value = "Cancelado";
+                   break;
+                case ViajeEstado::Finalizado:
+                   $value = "Finalizado";
+                   break;
+               }
+            return $value;}  ,
+            'filter' => [ViajeEstado::En_viaje => 'En viaje', ViajeEstado::Solicitado => 'Solicitado', ViajeEstado::Cancelado => 'Cancelado',ViajeEstado::Finalizado => 'Finalizado'],
+     ],
+     [
         'class' => 'kartik\grid\ActionColumn',
+        'template' => '{view}',
         'dropdown' => false,
         'vAlign'=>'middle',
         'urlCreator' => function($action, $model, $key, $index) { 
                 return Url::to([$action,'id'=>$key]);
         },
-        'viewOptions'=>['role'=>'modal-remote','title'=>'Ver','data-toggle'=>'tooltip'],
-        'updateOptions'=>['role'=>'modal-remote','title'=>'Modificar', 'data-toggle'=>'tooltip'],
-        'deleteOptions'=>['role'=>'modal-remote','title'=>'Borrar', 
-                          'data-confirm'=>false, 'data-method'=>false,// for overide yii data api
-                          'data-request-method'=>'post',
-                          'data-toggle'=>'tooltip',
-                          'data-confirm-title'=>'Está seguro?',
-                          'data-confirm-message'=>'Está seguro que desea borrar este item?'], 
+        'viewOptions'=>['role'=>'modal-remote','title'=>'View','data-toggle'=>'tooltip'],
     ],
 
 ];   

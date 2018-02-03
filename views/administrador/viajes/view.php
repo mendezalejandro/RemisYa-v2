@@ -1,7 +1,7 @@
 <?php
 
 use yii\widgets\DetailView;
-
+include \Yii::$app->basePath.'/models/Constantes.php';
 /* @var $this yii\web\View */
 /* @var $model app\models\Viajes */
 ?>
@@ -11,23 +11,54 @@ use yii\widgets\DetailView;
         'model' => $model,
         'attributes' => [
             'ViajeID',
-            'ChoferID',
-            'VehiculoID',
-            'TarifaID',
-            'TurnoID',
-            'AgenciaID',
-            'PersonaID',
+
+            ['label' => 'Chofer','value'=>function ($model){return $model->chofer->Nombre. ' '. $model->chofer->Apellido;},],
+            ['label' => 'Vehiculo','value'=>function ($model){return $model->vehiculo->Marca. ' '. $model->vehiculo->Modelo;},],
+            ['label' => 'Cliente','value'=>function ($model){return $model->persona->Nombre. ' '. $model->persona->Apellido;},],
             'FechaEmision',
             'FechaSalida',
-            'ViajeTipo',
-            'OrigenCoordenadas',
-            'DestinoCoordenadas',
-            'OrigenDireccion',
-            'DestinoDireccion',
+            [
+                'label'=>'Tipo de viaje',
+                'value'=>function ($data){
+                     $value;
+                     switch($data->ViajeTipo) {
+                        case TipoViaje::Web:
+                            $value = "Web";
+                            break;
+                        case TipoViaje::Personal:
+                            $value = "Personal";
+                            break;
+                        case TipoViaje::Telefonico:
+                            $value = "Telefonico";
+                            break;
+                        }
+                     return $value;},
+             ],
+             ['label' => 'Origen','value'=>function ($model){return $model->OrigenDireccion;},],
+             ['label' => 'Destino','value'=>function ($model){return $model->DestinoDireccion;},],
             'Comentario',
             'ImporteTotal',
             'Distancia',
-            'Estado',
+            [
+                'label' => 'Estado',
+                'value'=>function ($data){
+                   $value;
+                   switch($data->Estado) {
+                      case ViajeEstado::En_viaje:
+                          $value = "En viaje";
+                          break;
+                      case ViajeEstado::Solicitado:
+                          $value = "Solicitado";
+                          break;
+                      case ViajeEstado::Cancelado:
+                          $value = "Cancelado";
+                          break;
+                       case ViajeEstado::Finalizado:
+                          $value = "Finalizado";
+                          break;
+                      }
+                   return $value;}  ,
+            ],
         ],
     ]) ?>
 

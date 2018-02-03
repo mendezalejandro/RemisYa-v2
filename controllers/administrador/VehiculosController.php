@@ -84,7 +84,7 @@ class VehiculosController extends Controller
     {
         $request = Yii::$app->request;
         $model = new vehiculos();  
-
+        $model->AgenciaID = Yii::$app->user->identity->agencia;
         if($request->isAjax){
             /*
             *   Process for ajax request

@@ -62,7 +62,7 @@ class SearchViajes extends Viajes
             'ChoferID' => $this->ChoferID,
             'TarifaID' => $this->TarifaID,
             'TurnoID' => $this->TurnoID,
-            'AgenciaID' => $this->AgenciaID,
+            'Viajes.AgenciaID' => Yii::$app->user->identity->agencia,
             'FechaEmision' => $this->FechaEmision,
             'FechaSalida' => $this->FechaSalida,
             'ViajeTipo' => $this->ViajeTipo,

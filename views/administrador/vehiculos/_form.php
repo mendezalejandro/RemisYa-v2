@@ -1,7 +1,8 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use dosamigos\datepicker\DatePicker;
+include \Yii::$app->basePath.'/models/Constantes.php';
 /* @var $this yii\web\View */
 /* @var $model app\models\vehiculos */
 /* @var $form yii\widgets\ActiveForm */
@@ -11,20 +12,22 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'AgenciaID')->textInput() ?>
-
     <?= $form->field($model, 'Matricula')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'Modelo')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'Marca')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'Estado')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'FechaAlta')->textInput() ?>
-
-    <?= $form->field($model, 'FechaBaja')->textInput() ?>
-
+    <?= $form->field($model, 'Estado')->dropDownList(['prompt' => 'Seleccione un estado', VehiculoEstado::Habilitado => 'Habilitado', VehiculoEstado::Deshabilitado => 'Deshabilitado']) ?>
+    <?= $form->field($model, 'FechaAlta')->widget(
+    DatePicker::className(), [
+        //'inline' => false, 
+        'language' => 'es',
+        'clientOptions' => [
+            'autoclose' => true,
+            'format' => 'yyyy-mm-dd'
+        ]
+]);?>
   
 	<?php if (!Yii::$app->request->isAjax){ ?>
 	  	<div class="form-group">

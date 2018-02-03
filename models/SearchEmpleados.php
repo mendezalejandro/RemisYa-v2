@@ -67,8 +67,7 @@ class SearchEmpleados extends Personas
             'Agencias.AgenciaID' => Yii::$app->user->identity->agencia,
         ]);
         //Para la grilla de Empleados del administrador traigo todos los usuarios de la agencia y que nos son Clientes.
-        $test = self::Cliente; 
-        $query->andFilterWhere(['<>','RolID',$test]); 
+        $query->andFilterWhere(['<>','RolID',self::Cliente]); 
 
         $query->andFilterWhere(['like', 'Usuario', $this->Usuario])
             ->andFilterWhere(['like', 'Password', $this->Password])

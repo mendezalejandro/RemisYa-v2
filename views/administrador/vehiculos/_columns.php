@@ -1,22 +1,10 @@
 <?php
 use yii\helpers\Url;
-
+include \Yii::$app->basePath.'/models/Constantes.php';
 return [
-    [
-        'class' => 'kartik\grid\CheckboxColumn',
-        'width' => '20px',
-    ],
     [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
-    ],
-        [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'VehiculoID',
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'AgenciaID',
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
@@ -30,18 +18,29 @@ return [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Marca',
     ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'Estado',
-    // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'FechaAlta',
-    // ],
-    // [
-        // 'class'=>'\kartik\grid\DataColumn',
-        // 'attribute'=>'FechaBaja',
-    // ],
+     [
+         'class'=>'\kartik\grid\DataColumn',
+         'attribute'=>'FechaAlta',
+     ],
+     [
+         'class'=>'\kartik\grid\DataColumn',
+         'attribute'=>'FechaBaja',
+     ],
+     [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'Estado',
+        'value'=>function ($model){
+           switch($model->Estado) {
+              case PersonaEstado::Habilitado:
+                  $value = "Habilitado";
+                  break;
+                  case PersonaEstado::Deshabilitado:
+                  $value = "Deshabilitado";
+                  break;
+              }
+           return $value;},
+        'filter' => [VehiculoEstado::Habilitado => 'Habilitado', VehiculoEstado::Deshabilitado => 'Deshabilitado'],
+    ],
     [
         'class' => 'kartik\grid\ActionColumn',
         'dropdown' => false,
