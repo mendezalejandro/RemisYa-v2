@@ -13,10 +13,10 @@ use Yii;
  * @property int $TarifaID
  * @property int $TurnoID
  * @property int $AgenciaID
- * @property int $PersonaID Si el viaje solicitado es manualmente (Personal o por Telefono) el usuario puede ser NULL ya que no se tiene registro en ese momento.
+ * @property int $PersonaID Si el viaje Reservado es manualmente (Personal o por Telefono) el usuario puede ser NULL ya que no se tiene registro en ese momento.
  * @property string $FechaEmision
  * @property string $FechaSalida
- * @property int $ViajeTipo Viajes solicitados con la siguiente modalidad:  0 - Web 1 - Personal 2 - Telefonico
+ * @property int $ViajeTipo Viajes Reservados con la siguiente modalidad:  0 - Web 1 - Personal 2 - Telefonico
  * @property string $OrigenCoordenadas
  * @property string $DestinoCoordenadas
  * @property string $OrigenDireccion
@@ -88,6 +88,7 @@ class Viajes extends \yii\db\ActiveRecord
             'ImporteTotal' => 'Importe Total',
             'Distancia' => 'Distancia',
             'Estado' => 'Estado',
+            'nombreCompleto' => Yii::t('app', 'Nombre Completo')
         ];
     }
 
@@ -123,6 +124,9 @@ class Viajes extends \yii\db\ActiveRecord
         return $this->hasOne(Personas::className(), ['PersonaID' => 'PersonaID']);
     }
 
+    public function getNombreCompleto() {
+        return $this->persona->Nombre . ' ' . $this->persona->Apellido;
+    }
     /**
      * @return \yii\db\ActiveQuery
      */

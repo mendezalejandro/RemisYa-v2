@@ -21,6 +21,7 @@ use Yii;
  */
 class Vehiculos extends \yii\db\ActiveRecord
 {
+    const En_viaje = 0;
     /**
      * @inheritdoc
      */
@@ -74,5 +75,22 @@ class Vehiculos extends \yii\db\ActiveRecord
     public function getViajes()
     {
         return $this->hasMany(Viajes::className(), ['VehiculoID' => 'VehiculoID']);
+    }
+    public static function getVehiculos()
+    {
+        return self::find()
+        ->andWhere(['=', 'Agencias.AgenciaID', Yii::$app->user->identity->agencia])
+        ->all();
+    }
+    public static function getVehiculosDisponibles()
+    {
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand('
+        SELECT * FROM Vehiculos VEH WHERE VEH.VehiculoID IN (SELECT DISTINCT(VE.VehiculoID)
+        FROM Vehiculos VE 
+        INNER JOIN Viajes V ON V.VehiculoID = VE.VehiculoID
+        WHERE V.AgenciaID = '.Yii::$app->user->identity->agencia.' AND V.Estado != '.self::En_viaje.')');
+        $result = $command->queryAll();
+        return $result;
     }
 }

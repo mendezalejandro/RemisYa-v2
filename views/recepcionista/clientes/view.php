@@ -6,7 +6,6 @@ include \Yii::$app->basePath.'/models/Constantes.php';
 /* @var $model app\models\Personas */
 ?>
 <div class="personas-view">
- 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -18,7 +17,6 @@ include \Yii::$app->basePath.'/models/Constantes.php';
             'Documento',
             'Email:email',
             ['label' => 'Estado',
-            
             'value'=>function ($model){
                     switch($model->Estado) {
                        case PersonaEstado::Habilitado:

@@ -18,7 +18,7 @@ return [
          'attribute'=>'ChoferID',
          'value'=>function ($model){return $model->chofer->Nombre. ' '. $model->chofer->Apellido;},
          'label'=>'Chofer',
-         'filter' => \yii\helpers\ArrayHelper::map(Personas::find()->joinWith(['agencias'])->andFilterWhere(['=', 'RolID', TipoUsuario::Chofer])->andWhere(['=', 'Agencias.AgenciaID', Yii::$app->user->identity->agencia])->all(), 'PersonaID', 'Apellido'),
+         'filter' => \yii\helpers\ArrayHelper::map(Personas::getChoferes(), 'PersonaID', function($model) {return $model['Nombre'].' '.$model['Apellido'];}),
      ],
      [
         'class'=>'\kartik\grid\DataColumn',
@@ -71,8 +71,8 @@ return [
                case ViajeEstado::En_viaje:
                    $value = "En viaje";
                    break;
-               case ViajeEstado::Solicitado:
-                   $value = "Solicitado";
+               case ViajeEstado::Reservado:
+                   $value = "Reservado";
                    break;
                case ViajeEstado::Cancelado:
                    $value = "Cancelado";
@@ -82,7 +82,7 @@ return [
                    break;
                }
             return $value;}  ,
-            'filter' => [ViajeEstado::En_viaje => 'En viaje', ViajeEstado::Solicitado => 'Solicitado', ViajeEstado::Cancelado => 'Cancelado',ViajeEstado::Finalizado => 'Finalizado'],
+            'filter' => [ViajeEstado::En_viaje => 'En viaje', ViajeEstado::Reservado => 'Reservado', ViajeEstado::Cancelado => 'Cancelado',ViajeEstado::Finalizado => 'Finalizado'],
      ],
      [
         'class' => 'kartik\grid\ActionColumn',

@@ -69,8 +69,8 @@ return [
                case ViajeEstado::En_viaje:
                    $value = "En viaje";
                    break;
-               case ViajeEstado::Solicitado:
-                   $value = "Solicitado";
+               case ViajeEstado::Reservado:
+                   $value = "Reservado";
                    break;
                case ViajeEstado::Cancelado:
                    $value = "Cancelado";
@@ -80,7 +80,7 @@ return [
                    break;
                }
             return $value;}  ,
-            'filter' => [ViajeEstado::En_viaje => 'En viaje', ViajeEstado::Solicitado => 'Solicitado', ViajeEstado::Cancelado => 'Cancelado',ViajeEstado::Finalizado => 'Finalizado'],
+            'filter' => [ViajeEstado::En_viaje => 'En viaje', ViajeEstado::Reservado => 'Reservado', ViajeEstado::Cancelado => 'Cancelado',ViajeEstado::Finalizado => 'Finalizado'],
      ],
 
 ];   

@@ -33,6 +33,8 @@ use yii\web\IdentityInterface;
  */
 class Personas extends \yii\db\ActiveRecord implements IdentityInterface
 {
+    const Chofer =3;
+    const En_viaje = 0;
     /**
      * @inheritdoc
      */
@@ -209,4 +211,36 @@ class Personas extends \yii\db\ActiveRecord implements IdentityInterface
             return $this->Password === $password;
         }
     }
+    public static function getChoferes()
+    {
+        return self::find()
+        ->joinWith(['agencias'])
+        ->andFilterWhere(['=', 'RolID', self::Chofer])
+        ->andWhere(['=', 'Agencias.AgenciaID', Yii::$app->user->identity->agencia])
+        ->all();
+    }
+    public static function getChoferesDisponibles()
+    {
+        $connection = Yii::$app->getDb();
+        $command = $connection->createCommand('
+        SELECT * FROM Personas PE WHERE PE.PersonaID IN (
+        SELECT DISTINCT(P.PersonaID) 
+        FROM AgenciasPersonas AP
+            INNER JOIN Personas P ON P.PersonaID = AP.PersonaID AND RolID = '.self::Chofer.'
+            INNER JOIN Viajes V ON V.ChoferID = P.PersonaID
+        WHERE AP.AgenciaID = '.Yii::$app->user->identity->agencia.' AND V.Estado != '.self::En_viaje.')');
+        $result = $command->queryAll();
+        return $result;
+    }
+/*
+$result = $command->queryAll();
+        return self::find()
+        ->joinWith(['agencias'])
+        ->joinWith(['viajes'])
+        ->andFilterWhere(['=', 'RolID', self::Chofer])
+        ->andWhere(['=', 'Agencias.AgenciaID', Yii::$app->user->identity->agencia])
+        ->andFilterWhere(['=', 'Viajes.ChoferID', 3])
+        ->andWhere(['<>', 'Viajes.Estado', 0])
+        ->all();
+    }*/
 }

@@ -15,7 +15,7 @@ class TipoUsuario
   class ViajeEstado
   {
       const En_viaje = 0;
-      const Solicitado = 1;
+      const Reservado = 1;
       const Cancelado = 2;
       const Finalizado = 3;
   }
