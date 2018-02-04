@@ -2,11 +2,19 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use app\models\Personas;
+use app\models\Vehiculos;
 include \Yii::$app->basePath.'/models/Constantes.php';
 return [
     [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
+    ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'VehiculoID',
+        'value'=>function ($model){return $model->vehiculo->Marca. ' '. $model->vehiculo->Modelo;},
+        'label'=>'Vehiculo',
+        'filter' => \yii\helpers\ArrayHelper::map(Vehiculos::getVehiculos(), 'VehiculoID', function($model) {return $model['Marca'].' '.$model['Modelo'];}),
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
@@ -74,25 +82,25 @@ return [
         'urlCreator' => function($action, $model, $key, $index) { 
                 return Url::to([$action,'id'=>$key]);
         },
-        'template' => '{view} {Aprobar} {Desaprobar}',
+        'template' => '{view} {Asignar} {Cancelar}',
         'buttons' => [
-            'Aprobar' => function ($url, $model,$key) {
-                return Html::a('<span class="glyphicon glyphicon-thumbs-up"></span>', Url::to(['aprobar','id'=>$key]), [
+            'Asignar' => function ($url, $model,$key) {
+                return Html::a('<span class="glyphicon glyphicon-thumbs-up"></span>', Url::to(['asignar','id'=>$key]), [
                     'role'=>'modal-remote',
-                    'title' => 'Aprobar',
+                    'title' => 'Asignar',
                     'data-pjax' => true,
                     'data-toggle' => 'tooltip',
                 ]);
             },
-            'Desaprobar' => function ($url, $model,$key) {
-                return Html::a('<span class="glyphicon glyphicon-thumbs-down"></span>', Url::to(['desaprobar','id'=>$key]), [
-                    'role'=>'modal-remote','title'=>'Desaprobar', 
+            'Cancelar' => function ($url, $model,$key) {
+                return Html::a('<span class="glyphicon glyphicon-thumbs-down"></span>', Url::to(['cancelar','id'=>$key]), [
+                    'role'=>'modal-remote','title'=>'Cancelar', 
                             'data-pjax' => true,
                           'data-confirm'=>false, 'data-method'=>false,// for overide yii data api
                           'data-request-method'=>'post',
                           'data-toggle'=>'tooltip',
                           'data-confirm-title'=>'Está seguro?',
-                          'data-confirm-message'=>'Está seguro que desaprobar esta solicitud?'
+                          'data-confirm-message'=>'Está seguro que cancelar esta reserva?'
                 ]);
             },              
         ],

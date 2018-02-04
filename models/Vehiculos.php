@@ -79,7 +79,7 @@ class Vehiculos extends \yii\db\ActiveRecord
     public static function getVehiculos()
     {
         return self::find()
-        ->andWhere(['=', 'Agencias.AgenciaID', Yii::$app->user->identity->agencia])
+        ->andWhere(['=', 'Vehiculos.AgenciaID', Yii::$app->user->identity->agencia])
         ->all();
     }
     public static function getVehiculosDisponibles()

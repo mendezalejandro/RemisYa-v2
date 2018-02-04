@@ -81,12 +81,12 @@ class ReservasController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionAprobar($id)
+    public function actionAsignar($id)
     {
         
         $request = Yii::$app->request;
         $model = Viajes::findOne($id);
-        $model->Estado = self::En_viaje;
+        //$model->Estado = self::En_viaje;
         if($request->isAjax){
             /*
             *   Process for ajax request
@@ -94,8 +94,8 @@ class ReservasController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Aprobar solicitud",
-                    'content'=>$this->renderAjax('aprobar', [
+                    'title'=> "Asignar",
+                    'content'=>$this->renderAjax('asignar', [
                         'model' => $model,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
@@ -105,14 +105,14 @@ class ReservasController extends Controller
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Aprobar Solicitud",
-                    'content'=>'<span class="text-success">Solicitud aprobada exitosamente.</span>',
+                    'title'=> "Asignar",
+                    'content'=>'<span class="text-success">Asignacion exitosa.</span>',
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"])
                 ];         
             }else{           
                 return [
-                    'title'=> "Aprobar Solicitud",
-                    'content'=>$this->renderAjax('aprobar', [
+                    'title'=> "Asignar",
+                    'content'=>$this->renderAjax('asigar', [
                         'model' => $model,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
@@ -127,7 +127,7 @@ class ReservasController extends Controller
             if ($model->load($request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->ViajeID]);
             } else {
-                return $this->render('aprobar', [
+                return $this->render('asignar', [
                     'model' => $model,
                 ]);
             }
@@ -135,7 +135,7 @@ class ReservasController extends Controller
        
     }
 
-    public function actionDesaprobar($id)
+    public function actionCancelar($id)
     {
         $request = Yii::$app->request;
         $model = $this->findModel($id);       

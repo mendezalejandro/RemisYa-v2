@@ -25,7 +25,7 @@ include \Yii::$app->basePath.'/models/Constantes.php';
 
     <?= $form->field($model, 'Email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'RolID')->dropDownList(['prompt' => 'Seleccione un rol', TipoUsuario::Administrador => 'Administrador', TipoUsuario::Recepcionista => 'Recepcionista', TipoUsuario::Chofer => 'Chofer']) ?>
+    <?= $form->field($model, 'RolID')->dropDownList(['prompt' => 'Seleccione un rol', TipoUsuario::Administrador => 'Administrador', TipoUsuario::Recepcionista => 'Recepcionista', TipoUsuario::Chofer => 'Chofer'])->label('Rol') ?>
 
     <?= $form->field($model, 'Estado')->dropDownList(['prompt' => 'Seleccione un estado',PersonaEstado::Habilitado => 'Habilitado', PersonaEstado::Deshabilitado => 'Deshabilitado']) ?>
 

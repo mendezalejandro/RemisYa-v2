@@ -52,6 +52,7 @@ class SearchReservas extends Viajes
         ]);
         $query->joinWith(['vehiculo']);
         $query->joinWith(['persona']);
+        //$query->join('LEFT OUTER JOIN', 'personas', 'personas.PersonaID=Viajes.PersonaID');
 
         $dataProvider->setSort([
             'attributes' => [
@@ -74,6 +75,7 @@ class SearchReservas extends Viajes
 
         $query->andFilterWhere([
             'ViajeID' => $this->ViajeID,
+            'Viajes.VehiculoID' => $this->VehiculoID,
             'ChoferID' => $this->ChoferID,
             'TarifaID' => $this->TarifaID,
             'TurnoID' => $this->TurnoID,
@@ -90,13 +92,15 @@ class SearchReservas extends Viajes
             ->andFilterWhere(['like', 'OrigenDireccion', $this->OrigenDireccion])
             ->andFilterWhere(['like', 'DestinoDireccion', $this->DestinoDireccion])
             ->andFilterWhere(['like', 'Comentario', $this->Comentario])
-            ->andFilterWhere(['<>', 'ViajeTipo', self::Web])
-            ->andFilterWhere(['like', 'Vehiculos.Marca', $this->VehiculoID]);
+            ->andFilterWhere(['<>', 'ViajeTipo', self::Web]);
+            //->andFilterWhere(['like', 'Vehiculos.Marca', $this->VehiculoID])
 
-        $query->andWhere('Personas.Nombre LIKE "%' . $this->nombreCompleto . '%" ' .
-            'OR Personas.Apellido LIKE "%' . $this->nombreCompleto . '%"'
-        );
-
+            if($this->nombreCompleto != "")
+            {
+                $query->andWhere('(Personas.Nombre LIKE "%' . $this->nombreCompleto . '%" ' .'OR Personas.Apellido LIKE "%' . $this->nombreCompleto . '%")');
+            }
+        
+        $pepe = $query->createCommand()->getRawSql();
         return $dataProvider;
     }
 }

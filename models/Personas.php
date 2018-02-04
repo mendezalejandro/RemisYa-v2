@@ -34,6 +34,7 @@ use yii\web\IdentityInterface;
 class Personas extends \yii\db\ActiveRecord implements IdentityInterface
 {
     const Chofer =3;
+    const Cliente =4;
     const En_viaje = 0;
     /**
      * @inheritdoc
@@ -210,6 +211,14 @@ class Personas extends \yii\db\ActiveRecord implements IdentityInterface
         }else{
             return $this->Password === $password;
         }
+    }
+    public static function getClientes()
+    {
+        return self::find()
+        ->joinWith(['agencias'])
+        ->andFilterWhere(['=', 'RolID', self::Cliente])
+        ->andWhere(['=', 'Agencias.AgenciaID', Yii::$app->user->identity->agencia])
+        ->all();
     }
     public static function getChoferes()
     {

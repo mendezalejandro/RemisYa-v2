@@ -125,7 +125,13 @@ class Viajes extends \yii\db\ActiveRecord
     }
 
     public function getNombreCompleto() {
-        return $this->persona->Nombre . ' ' . $this->persona->Apellido;
+        if($this->persona == null){
+            return "";
+        }
+        else{
+            return $this->persona->Nombre . ' ' . $this->persona->Apellido;
+        }
+        
     }
     /**
      * @return \yii\db\ActiveQuery
