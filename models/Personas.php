@@ -232,12 +232,16 @@ class Personas extends \yii\db\ActiveRecord implements IdentityInterface
     {
         $connection = Yii::$app->getDb();
         $command = $connection->createCommand('
-        SELECT * FROM Personas PE WHERE PE.PersonaID IN (
-        SELECT DISTINCT(P.PersonaID) 
-        FROM AgenciasPersonas AP
-            INNER JOIN Personas P ON P.PersonaID = AP.PersonaID AND RolID = '.self::Chofer.'
-            INNER JOIN Viajes V ON V.ChoferID = P.PersonaID
-        WHERE AP.AgenciaID = '.Yii::$app->user->identity->agencia.' AND V.Estado != '.self::En_viaje.')');
+SELECT P.* FROM AgenciasPersonas AP
+INNER JOIN Personas P ON P.PersonaID = AP.PersonaID
+WHERE AP.AgenciaID = '.Yii::$app->user->identity->agencia.' AND P.RolID = '.self::Chofer.'
+AND P.PersonaID NOT IN 
+(
+SELECT P.PersonaID FROM AgenciasPersonas AP
+INNER JOIN Personas P ON P.PersonaID = AP.PersonaID
+INNER JOIN Viajes V ON V.ChoferID = P.PersonaID
+WHERE AP.AgenciaID = '.Yii::$app->user->identity->agencia.' AND V.Estado = '.self::En_viaje.' AND P.RolID = '.self::Chofer.'
+)');
         $result = $command->queryAll();
         return $result;
     }
