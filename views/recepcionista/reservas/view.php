@@ -5,7 +5,7 @@ include \Yii::$app->basePath.'/models/Constantes.php';
 /* @var $this yii\web\View */
 /* @var $model app\models\Viajes */
 ?>
-<div class="reservas-view">
+<div class="viajes-view">
  
     <?= DetailView::widget([
         'model' => $model,

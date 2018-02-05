@@ -1,6 +1,6 @@
 <?php
 
-namespace app\controllers;
+namespace app\controllers\recepcionista;
 
 use Yii;
 use app\models\Viajes;
@@ -12,10 +12,13 @@ use \yii\web\Response;
 use yii\helpers\Html;
 
 /**
- * ViajesController implements the CRUD actions for Viajes model.
+ * RecepcionistaController implements the CRUD actions for Viajes model.
  */
 class ViajesController extends Controller
 {
+    const En_viaje = 0;
+    const Cancelado = 2;
+    const Finalizado = 3;
     public $layout = "mainRecepcionista";
     /**
      * @inheritdoc
@@ -58,7 +61,7 @@ class ViajesController extends Controller
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                    'title'=> "Viajes #".$id,
+                    'title'=> "Viaje #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $this->findModel($id),
                     ]),
@@ -71,80 +74,19 @@ class ViajesController extends Controller
             ]);
         }
     }
-
-    /**
-     * Creates a new Viajes model.
-     * For ajax request will return json object
-     * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $request = Yii::$app->request;
-        $model = new Viajes();  
-
-        if($request->isAjax){
-            /*
-            *   Process for ajax request
-            */
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            if($request->isGet){
-                return [
-                    'title'=> "Create new Viajes",
-                    'content'=>$this->renderAjax('create', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
-            }else if($model->load($request->post()) && $model->save()){
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new Viajes",
-                    'content'=>'<span class="text-success">Create Viajes success</span>',
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
-        
-                ];         
-            }else{           
-                return [
-                    'title'=> "Create new Viajes",
-                    'content'=>$this->renderAjax('create', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
-            }
-        }else{
-            /*
-            *   Process for non-ajax request
-            */
-            if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->ViajeID]);
-            } else {
-                return $this->render('create', [
-                    'model' => $model,
-                ]);
-            }
-        }
-       
-    }
-
-    /**
+        /**
      * Updates an existing Viajes model.
      * For ajax request will return json object
      * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+    public function actionAsignar($id)
     {
+        
         $request = Yii::$app->request;
-        $model = $this->findModel($id);       
-
+        $model = Viajes::findOne($id);
+        //$model->Estado = self::En_viaje;
         if($request->isAjax){
             /*
             *   Process for ajax request
@@ -152,32 +94,31 @@ class ViajesController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Update Viajes #".$id,
-                    'content'=>$this->renderAjax('update', [
+                    'title'=> "Asignar",
+                    'content'=>$this->renderAjax('asignar', [
                         'model' => $model,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+        
                 ];         
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Viajes #".$id,
-                    'content'=>$this->renderAjax('view', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
-                ];    
-            }else{
-                 return [
-                    'title'=> "Update Viajes #".$id,
-                    'content'=>$this->renderAjax('update', [
+                    'title'=> "Asignar",
+                    'content'=>'<span class="text-success">Asignacion exitosa.</span>',
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"])
+                ];         
+            }else{           
+                return [
+                    'title'=> "Asignar",
+                    'content'=>$this->renderAjax('asigar', [
                         'model' => $model,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                                 Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-                ];        
+        
+                ];         
             }
         }else{
             /*
@@ -186,29 +127,24 @@ class ViajesController extends Controller
             if ($model->load($request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->ViajeID]);
             } else {
-                return $this->render('update', [
+                return $this->render('asignar', [
                     'model' => $model,
                 ]);
             }
         }
+       
     }
 
-    /**
-     * Delete an existing Viajes model.
-     * For ajax request will return json object
-     * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id)
+    public function actionFinalizar($id)
     {
         $request = Yii::$app->request;
-        $this->findModel($id)->delete();
-
+        $model = $this->findModel($id);       
+        $model->Estado = self::Finalizado;
         if($request->isAjax){
             /*
             *   Process for ajax request
             */
+            $model->save();
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
         }else{
@@ -217,39 +153,6 @@ class ViajesController extends Controller
             */
             return $this->redirect(['index']);
         }
-
-
-    }
-
-     /**
-     * Delete multiple existing Viajes model.
-     * For ajax request will return json object
-     * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionBulkDelete()
-    {        
-        $request = Yii::$app->request;
-        $pks = explode(',', $request->post( 'pks' )); // Array or selected records primary keys
-        foreach ( $pks as $pk ) {
-            $model = $this->findModel($pk);
-            $model->delete();
-        }
-
-        if($request->isAjax){
-            /*
-            *   Process for ajax request
-            */
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
-        }else{
-            /*
-            *   Process for non-ajax request
-            */
-            return $this->redirect(['index']);
-        }
-       
     }
 
     /**

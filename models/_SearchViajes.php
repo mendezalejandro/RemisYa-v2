@@ -12,9 +12,6 @@ use app\models\Viajes;
  */
 class SearchViajes extends Viajes
 {
-    public $nombreCompleto;
-    const Reservado = 1;
-    const Web = 0;
     /**
      * @inheritdoc
      */
@@ -22,7 +19,7 @@ class SearchViajes extends Viajes
     {
         return [
             [['ViajeID', 'ChoferID', 'TarifaID', 'TurnoID', 'AgenciaID',  'ViajeTipo', 'Estado'], 'integer'],
-            [['nombreCompleto', 'FechaEmision', 'VehiculoID','PersonaID','FechaSalida', 'OrigenCoordenadas', 'DestinoCoordenadas', 'OrigenDireccion', 'DestinoDireccion', 'Comentario'], 'safe'],
+            [['FechaEmision', 'VehiculoID','PersonaID','FechaSalida', 'OrigenCoordenadas', 'DestinoCoordenadas', 'OrigenDireccion', 'DestinoDireccion', 'Comentario'], 'safe'],
             [['ImporteTotal', 'Distancia'], 'number'],
         ];
     }
@@ -52,18 +49,6 @@ class SearchViajes extends Viajes
         ]);
         $query->joinWith(['vehiculo']);
         $query->joinWith(['persona']);
-/*
-        $dataProvider->setSort([
-            'attributes' => [
-                'nombreCompleto' => [
-                    'asc' => ['personas.Nombre' => SORT_ASC, 'personas.Apellido' => SORT_ASC],
-                    'desc' => ['personas.Nombre' => SORT_DESC, 'personas.Apellido' => SORT_DESC],
-                    'label' => 'Full Name',
-                    'default' => SORT_ASC
-                ],
-            ]
-        ]);*/
-        
         $this->load($params);
 
         if (!$this->validate()) {
@@ -74,16 +59,15 @@ class SearchViajes extends Viajes
 
         $query->andFilterWhere([
             'ViajeID' => $this->ViajeID,
-            'Viajes.VehiculoID' => $this->VehiculoID,
             'ChoferID' => $this->ChoferID,
             'TarifaID' => $this->TarifaID,
             'TurnoID' => $this->TurnoID,
             'Viajes.AgenciaID' => Yii::$app->user->identity->agencia,
             'FechaEmision' => $this->FechaEmision,
             'FechaSalida' => $this->FechaSalida,
+            'ViajeTipo' => $this->ViajeTipo,
             'ImporteTotal' => $this->ImporteTotal,
             'Distancia' => $this->Distancia,
-            'ViajeTipo' => $this->ViajeTipo,
             'Viajes.Estado' => $this->Estado, //Le pongo Viajes.Estado porque la columna es ambigua con el inner join a vehiculos.
         ]);
 
@@ -92,15 +76,10 @@ class SearchViajes extends Viajes
             ->andFilterWhere(['like', 'OrigenDireccion', $this->OrigenDireccion])
             ->andFilterWhere(['like', 'DestinoDireccion', $this->DestinoDireccion])
             ->andFilterWhere(['like', 'Comentario', $this->Comentario])
-            ->andFilterWhere(['<>', 'Viajes.Estado', self::Reservado]);
-            //->andFilterWhere(['like', 'Vehiculos.Marca', $this->VehiculoID])
+            ->andFilterWhere(['like', 'Vehiculos.Marca', $this->VehiculoID])
+            //->andFilterWhere(['like', 'Personas.Nombre', $this->PersonaID])
+            ->andFilterWhere(['like', 'Personas.Apellido', $this->PersonaID]);
 
-            if($this->nombreCompleto != "")
-            {
-                $query->andWhere('(Personas.Nombre LIKE "%' . $this->nombreCompleto . '%" ' .'OR Personas.Apellido LIKE "%' . $this->nombreCompleto . '%")');
-            }
-        
-        $query->orderBy(['Viajes.FechaEmision'=>SORT_DESC]);
         return $dataProvider;
     }
 }

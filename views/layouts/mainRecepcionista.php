@@ -50,7 +50,7 @@ $this->title = 'Recepcionista';
                     [
                         'label' => '<span class="fa fa-suitcase"></span> ' . Html::encode('Viajes'),
                         'items' => [
-                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Administrar'), 'url' => ['/recepcionista/alta_viaje_manual'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
+                            ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Viajes'), 'url' => ['recepcionista/viajes/index'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
                             ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Reservas'), 'url' => ['recepcionista/reservas/index'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
                             ['label' => '<span class="fa fa-th-list"></span> ' . Html::encode('Solicitudes Online'), 'url' => ['recepcionista/solicitudes/index'], 'style' => 'background-color:blue;', 'class' => 'dropdown-toggle'],
                         ],

@@ -54,7 +54,7 @@ class SearchReservas extends Viajes
         $query->joinWith(['persona']);
         //$query->join('LEFT OUTER JOIN', 'personas', 'personas.PersonaID=Viajes.PersonaID');
 
-        $dataProvider->setSort([
+        /*$dataProvider->setSort([
             'attributes' => [
                 'nombreCompleto' => [
                     'asc' => ['personas.Nombre' => SORT_ASC, 'personas.Apellido' => SORT_ASC],
@@ -63,7 +63,7 @@ class SearchReservas extends Viajes
                     'default' => SORT_ASC
                 ],
             ]
-        ]);
+        ]);*/
         
         $this->load($params);
 
@@ -99,8 +99,7 @@ class SearchReservas extends Viajes
             {
                 $query->andWhere('(Personas.Nombre LIKE "%' . $this->nombreCompleto . '%" ' .'OR Personas.Apellido LIKE "%' . $this->nombreCompleto . '%")');
             }
-        
-        $pepe = $query->createCommand()->getRawSql();
+            $query->orderBy(['Viajes.FechaEmision'=>SORT_DESC]);
         return $dataProvider;
     }
 }

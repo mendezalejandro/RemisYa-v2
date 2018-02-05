@@ -10,13 +10,13 @@ use johnitvn\ajaxcrud\BulkButtonWidget;
 /* @var $searchModel app\models\SearchViajes */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Viajes';
+$this->title = 'Reservas';
 $this->params['breadcrumbs'][] = $this->title;
 
 CrudAsset::register($this);
 
 ?>
-<div class="viajes-index">
+<div class="reservas-index">
     <div id="ajaxCrudDatatable">
         <?=GridView::widget([
             'id'=>'crud-datatable',
@@ -26,8 +26,6 @@ CrudAsset::register($this);
             'columns' => require(__DIR__.'/_columns.php'),
             'toolbar'=> [
                 ['content'=>
-                    Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'],
-                    ['role'=>'modal-remote','title'=> 'Crear Viajes','class'=>'btn btn-default']).
                     Html::a('<i class="glyphicon glyphicon-repeat"></i>', [''],
                     ['data-pjax'=>1, 'class'=>'btn btn-default', 'title'=>'Resetear grilla']).
                     '{toggleData}'.
