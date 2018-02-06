@@ -34,6 +34,10 @@ CrudAsset::register($this);
                     '{export}'
                 ],
             ],          
+            'hover' => true,
+            'rowOptions' => function ($model, $key, $index, $grid) {
+                return ['rowid' => $key, 'onclick' => '$(this).addClass("success").siblings().removeClass("success");','style' => 'cursor:pointer'];
+            },
             'striped' => true,
             'condensed' => true,
             'responsive' => true,          

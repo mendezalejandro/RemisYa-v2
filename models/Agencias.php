@@ -24,6 +24,7 @@ use Yii;
  */
 class Agencias extends \yii\db\ActiveRecord
 {
+    const TarifaHabilitada=0;
     /**
      * @inheritdoc
      */
@@ -115,5 +116,22 @@ class Agencias extends \yii\db\ActiveRecord
     public function getViajes()
     {
         return $this->hasMany(Viajes::className(), ['AgenciaID' => 'AgenciaID']);
+    }
+    public static function getDireccion()
+    {
+        $result = Direcciones::find()
+        ->andWhere(['=', 'AplicacionID', Yii::$app->user->identity->agencia])
+        ->andWhere(['=', 'DireccionTipo', 1])
+        ->andWhere(['=', 'DireccionDefault', 1])
+        ->all();
+        return $result[0];
+    }
+    public static function getTarifa()
+    {
+        $result = Tarifas::find()
+        ->andWhere(['=', 'AgenciaID', Yii::$app->user->identity->agencia])
+        ->andWhere(['=', 'Estado', self::TarifaHabilitada])
+        ->all();
+        return $result[0];
     }
 }

@@ -12,9 +12,15 @@ include \Yii::$app->basePath.'/models/Constantes.php';
         'attributes' => [
             'ViajeID',
 
-            ['label' => 'Chofer','value'=>function ($model){return $model->chofer->Nombre. ' '. $model->chofer->Apellido;},],
-            ['label' => 'Vehiculo','value'=>function ($model){return $model->vehiculo->Marca. ' '. $model->vehiculo->Modelo;},],
-            ['label' => 'Cliente','value'=>function ($model){return $model->persona->Nombre. ' '. $model->persona->Apellido;},],
+            ['label' => 'Chofer',
+            'value'=>function ($model){if($model->chofer == null){return null;}else {return $model->chofer->Nombre. ' '. $model->chofer->Apellido;}},
+            ],
+            ['label' => 'Vehiculo',
+            'value'=>function ($model){if($model->vehiculo == null){return null;}else {return $model->vehiculo->Marca. ' '. $model->vehiculo->Modelo;}},
+            ],
+            ['label' => 'Cliente',
+            'value'=>function ($model){if($model->persona == null){return null;}else {return $model->persona->Nombre. ' '. $model->persona->Apellido;}},
+            ],
             'FechaEmision',
             'FechaSalida',
             [

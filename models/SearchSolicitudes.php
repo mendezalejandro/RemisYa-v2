@@ -52,7 +52,7 @@ class SearchSolicitudes extends Viajes
         ]);
         $query->joinWith(['vehiculo']);
         $query->joinWith(['persona']);
-
+/*
         $dataProvider->setSort([
             'attributes' => [
                 'nombreCompleto' => [
@@ -62,7 +62,7 @@ class SearchSolicitudes extends Viajes
                     'default' => SORT_ASC
                 ],
             ]
-        ]);
+        ]);*/
         
         $this->load($params);
 

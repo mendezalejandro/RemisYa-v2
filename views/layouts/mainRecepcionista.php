@@ -47,6 +47,8 @@ $this->title = 'Recepcionista';
                 'options' => ['class' => 'navbar-nav navbar-right'],
                 'items' => [
                     ['label' => '<span class="fa fa-home"  ></span> ' . Html::encode('Home'), 'url' => ['recepcionista/index/index']],
+
+                    ['label' => '<span class="fa fa-globe"  ></span> ' . Html::encode('Carga de viajes'), 'url' => ['recepcionista/carga/index']],
                     [
                         'label' => '<span class="fa fa-suitcase"></span> ' . Html::encode('Viajes'),
                         'items' => [

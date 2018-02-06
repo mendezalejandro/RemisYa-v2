@@ -12,14 +12,14 @@ return [
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'VehiculoID',
-        'value'=>function ($model){return $model->vehiculo->Marca. ' '. $model->vehiculo->Modelo;},
+        'value'=>function ($model){if($model->vehiculo == null){return null;}else {return $model->vehiculo->Marca. ' '. $model->vehiculo->Modelo;}},
         'label'=>'Vehiculo',
         'filter' => \yii\helpers\ArrayHelper::map(Vehiculos::getVehiculos(), 'VehiculoID', function($model) {return $model['Marca'].' '.$model['Modelo'];}),
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'ChoferID',
-        'value'=>function ($model){return $model->chofer->Nombre. ' '. $model->chofer->Apellido;},
+        'value'=>function ($model){if($model->chofer == null){return null;}else {return $model->chofer->Nombre. ' '. $model->chofer->Apellido;}},
         'label'=>'Chofer',
         'filter' => \yii\helpers\ArrayHelper::map(Personas::getChoferes(), 'PersonaID', function($model) {return $model['Nombre'].' '.$model['Apellido'];}),
     ],

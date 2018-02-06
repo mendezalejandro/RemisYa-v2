@@ -24,9 +24,13 @@ class AppAsset extends AssetBundle
         'css/modal.css',
         //'css/grid.css',
         'css/mainPage.css',
+        'css/contentMap.css',
     ];
     public $js = [
         'js/modalShow.js',
+        'js/Mapas.js',
+        'https://js.pusher.com/3.2/pusher.min.js',
+        'https://maps.googleapis.com/maps/api/js?key=AIzaSyDMVbdR-TGis783bW9rB9tZUJXVXsIRzkQ&libraries=places,geometry',
     ];
     public $depends = [
         'yii\web\YiiAsset',

@@ -72,11 +72,10 @@ class SearchEmpleados extends Personas
         $query->andFilterWhere(['like', 'Usuario', $this->Usuario])
             ->andFilterWhere(['like', 'Password', $this->Password])
             ->andFilterWhere(['like', 'Telefono', $this->Telefono])
-            ->andFilterWhere(['like', 'Nombre', $this->Nombre])
+            ->andFilterWhere(['like', 'Personas.Nombre', $this->Nombre])
             ->andFilterWhere(['like', 'Apellido', $this->Apellido])
             ->andFilterWhere(['like', 'Documento', $this->Documento])
             ->andFilterWhere(['like', 'Email', $this->Email]);
-
         return $dataProvider;
     }
 }

@@ -17,7 +17,7 @@ Modal::end();
 ?>
 <div class="container">
     <div class="jumbotron">
-        <h1><b>Bienvenido <?php echo Yii::$app->user->identity->Nombre?></b></h1>
+        <h1><b>Bienvenid@ <?php echo Yii::$app->user->identity->Nombre?></b></h1>
         <div class="row">
             <blockquote>
                 <div>

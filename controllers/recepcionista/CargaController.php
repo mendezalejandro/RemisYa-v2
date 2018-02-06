@@ -1,10 +1,10 @@
 <?php
 
-namespace app\controllers;
+namespace app\controllers\recepcionista;
 
 use Yii;
-use app\models\vehiculos;
-use app\models\SearchVehiculos;
+use app\models\Viajes;
+use app\models\SearchViajes;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,9 +12,9 @@ use \yii\web\Response;
 use yii\helpers\Html;
 
 /**
- * VehiculosController implements the CRUD actions for vehiculos model.
+ * ViajesController implements the CRUD actions for Viajes model.
  */
-class VehiculosController extends Controller
+class CargaController extends Controller
 {
     public $layout = "mainRecepcionista";
     /**
@@ -34,23 +34,7 @@ class VehiculosController extends Controller
     }
 
     /**
-     * Lists all vehiculos models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {    
-        $searchModel = new SearchVehiculos();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-
-    /**
-     * Displays a single vehiculos model.
+     * Displays a single Viajes model.
      * @param integer $id
      * @return mixed
      */
@@ -60,7 +44,7 @@ class VehiculosController extends Controller
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
-                    'title'=> "vehiculos #".$id,
+                    'title'=> "Viajes #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $this->findModel($id),
                     ]),
@@ -75,15 +59,15 @@ class VehiculosController extends Controller
     }
 
     /**
-     * Creates a new vehiculos model.
+     * Creates a new Viajes model.
      * For ajax request will return json object
      * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionIndex()
     {
         $request = Yii::$app->request;
-        $model = new vehiculos();  
+        $model = new Viajes();  
 
         if($request->isAjax){
             /*
@@ -92,8 +76,8 @@ class VehiculosController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Create new vehiculos",
-                    'content'=>$this->renderAjax('create', [
+                    'title'=> "Create new Viajes",
+                    'content'=>$this->renderAjax('index', [
                         'model' => $model,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
@@ -103,16 +87,16 @@ class VehiculosController extends Controller
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new vehiculos",
-                    'content'=>'<span class="text-success">Create vehiculos success</span>',
+                    'title'=> "Create new Viajes",
+                    'content'=>'<span class="text-success">Create Viajes success</span>',
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
                             Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
         
                 ];         
             }else{           
                 return [
-                    'title'=> "Create new vehiculos",
-                    'content'=>$this->renderAjax('create', [
+                    'title'=> "Create new Viajes",
+                    'content'=>$this->render('index', [
                         'model' => $model,
                     ]),
                     'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
@@ -125,9 +109,9 @@ class VehiculosController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->VehiculoID]);
+                return $this->redirect(['view', 'id' => $model->ViajeID]);
             } else {
-                return $this->render('create', [
+                return $this->render('index', [
                     'model' => $model,
                 ]);
             }
@@ -136,7 +120,7 @@ class VehiculosController extends Controller
     }
 
     /**
-     * Updates an existing vehiculos model.
+     * Updates an existing Viajes model.
      * For ajax request will return json object
      * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
@@ -154,7 +138,7 @@ class VehiculosController extends Controller
             Yii::$app->response->format = Response::FORMAT_JSON;
             if($request->isGet){
                 return [
-                    'title'=> "Update vehiculos #".$id,
+                    'title'=> "Update Viajes #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -164,7 +148,7 @@ class VehiculosController extends Controller
             }else if($model->load($request->post()) && $model->save()){
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "vehiculos #".$id,
+                    'title'=> "Viajes #".$id,
                     'content'=>$this->renderAjax('view', [
                         'model' => $model,
                     ]),
@@ -173,7 +157,7 @@ class VehiculosController extends Controller
                 ];    
             }else{
                  return [
-                    'title'=> "Update vehiculos #".$id,
+                    'title'=> "Update Viajes #".$id,
                     'content'=>$this->renderAjax('update', [
                         'model' => $model,
                     ]),
@@ -186,7 +170,7 @@ class VehiculosController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->VehiculoID]);
+                return $this->redirect(['view', 'id' => $model->ViajeID]);
             } else {
                 return $this->render('update', [
                     'model' => $model,
@@ -196,7 +180,7 @@ class VehiculosController extends Controller
     }
 
     /**
-     * Delete an existing vehiculos model.
+     * Delete an existing Viajes model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -224,7 +208,7 @@ class VehiculosController extends Controller
     }
 
      /**
-     * Delete multiple existing vehiculos model.
+     * Delete multiple existing Viajes model.
      * For ajax request will return json object
      * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
@@ -255,15 +239,15 @@ class VehiculosController extends Controller
     }
 
     /**
-     * Finds the vehiculos model based on its primary key value.
+     * Finds the Viajes model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return vehiculos the loaded model
+     * @return Viajes the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = vehiculos::findOne($id)) !== null) {
+        if (($model = Viajes::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

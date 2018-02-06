@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Url;
 use app\models\Personas;
+use app\models\Vehiculos;
 include \Yii::$app->basePath.'/models/Constantes.php';
 return [
     [
@@ -10,21 +11,29 @@ return [
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'VehiculoID',
-        'value'=>'vehiculo.Marca',
-        'label'=>'Vehiculo Marca',
+        'value'=>function ($model){
+            if($model->vehiculo == null)
+            {return null;}
+                else {return $model->vehiculo->Marca. ' '. $model->vehiculo->Modelo;}
+            },
+        'label'=>'Vehiculo',
+        'filter' => \yii\helpers\ArrayHelper::map(Vehiculos::getVehiculos(), 'VehiculoID', function($model) {return $model['Marca'].' '.$model['Modelo'];}),
     ],
      [
          'class'=>'\kartik\grid\DataColumn',
          'attribute'=>'ChoferID',
-         'value'=>function ($model){return $model->chofer->Nombre. ' '. $model->chofer->Apellido;},
+         'value'=>function ($model){
+            if($model->chofer == null)
+        {return null;}
+            else {return $model->chofer->Nombre. ' '. $model->chofer->Apellido;}},
          'label'=>'Chofer',
          'filter' => \yii\helpers\ArrayHelper::map(Personas::getChoferes(), 'PersonaID', function($model) {return $model['Nombre'].' '.$model['Apellido'];}),
      ],
      [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'PersonaID',
-        'value'=>'persona.Apellido',
-        'label'=>'Cliente Apellido',
+        'attribute'=>'nombreCompleto',
+        /*'value'=>'persona.Apellido',*/
+        'label'=>'Cliente',
      ],
      [
          'class'=>'\kartik\grid\DataColumn',

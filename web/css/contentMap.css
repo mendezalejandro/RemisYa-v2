@@ -1,0 +1,126 @@
+#btn-ver-remiserias, #btn-solcitar-remis, #btn-obtener-ubicacion-en-el-mapa{
+    font-family:arial;
+    -moz-user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857;
+    margin-bottom: 0;
+    padding: 6px 12px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    color: #fff;
+    font-size: 17px;
+    margin-left:15px;
+    display:inline-block;
+    border-radius: 20px;
+}
+
+#dvMapHome{
+    width: 600px;
+    height: 600px;
+    width: 100%;
+    padding: 20px 0px;
+    box-shadow: 15px 15px 15px #888888;
+    margin-left:0px;
+    display:block;
+
+}
+
+#btn-ver-remiserias:hover, #btn-solcitar-remis:hover{
+    color:#ffffff;
+    background-color:#286090;
+    border-color:#2e6da4;
+    text-decoration:none;
+    cursor:pointer;
+    filter:alpha(opacity=50);
+    size:5px 75px;	
+}
+
+#bar-buttons{
+    color:#ffffff;
+    padding: 20px 20px;
+    width:100%;
+    background-color:#F5F5DA;
+    border-radius:40px;
+}
+#pac-input {
+    background-color: #fff;
+    font-family: Roboto;
+    font-size: 15px;
+    font-weight: 300;
+    margin-left: 12px;
+    padding: 0 11px 0 13px;
+    text-overflow: ellipsis;
+    width: 300px;
+    display: none;
+  }
+  
+  #pac-input:focus {
+    border-color: #4d90fe;
+  }
+  
+  .pac-container {
+    font-family: Roboto;
+  }
+  
+  #type-selector {
+    color: #fff;
+    background-color: #4d90fe;
+    padding: 5px 11px 0px 11px;
+  }
+  
+  #type-selector label {
+    font-family: Roboto;
+    font-size: 13px;
+    font-weight: 300;
+  }
+  #map-Index{
+      width: 100%;
+  }
+  .colorBlack{
+      color:black
+  }
+  #map {	
+      height:400px 
+  }
+  #map-container {
+      float:right;
+      width: 40%;
+  
+  }
+  #LoadingBlocker
+  {
+      z-index: 999999;
+      min-height: 800px;
+      height: 100%;
+      min-width: 1200px;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: #fff;
+      filter: alpha(opacity=50);
+      opacity: 0.5;
+      -moz-opacity: 0.5;
+      display: none;
+  }
+  
+  #LoadingImage{
+      z-index: 999999;
+      position: absolute;
+      top: 350px;
+      left: 490px;
+      height: 30px;
+      width: 30px;
+  
+      
+  }
+  

@@ -17,14 +17,14 @@ Modal::end();
 ?>
 <div class="container">
     <div class="jumbotron">
-        <h1><b>Bienvenido <?php echo Yii::$app->user->identity->Nombre?></b></h1>
+        <h1><b>Bienvenid@ <?php echo Yii::$app->user->identity->Nombre?></b></h1>
         <div class="row">
             <blockquote>
                 <div>
                 <p style="text-align: justify">
-                Mediante la aplicaci&oacute;n usted podr&aacute; gestionar su remiser&iacute;a de manera m&aacute;s eficiente y efectiva.
-                Para ello usted cuenta con las posibilidad de agregar, actualizar y eliminar un empleado sea, un chofer o un/a telefonista.
-                Adem&aacute;, usted podr&aacute; listar el historial de calificaciones y viajes de su agencia.
+                Mediante la aplicaci&oacute;n usted podr&aacute; gestionar los viajes de una manera efectiva.
+                Para ello usted cuenta con las posibilidad de agregar, actualizar y eliminar viajes, asignar choferes y vehiculos a solicitudes online y reservas.
+                Adem&aacute;, usted podr&aacute; cargar un esquema de tarifas por cantidad kilometros y realizar la carga de Clientes de la agencia.
             </p>
                 </div>
             </blockquote>
