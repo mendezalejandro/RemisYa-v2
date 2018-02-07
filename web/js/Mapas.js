@@ -11,7 +11,7 @@
 function geocodeResult(results, status) {
 	// Verificamos el estatus
 	if (status == 'OK')
-	{
+			{
 		// Si hay resultados encontrados, centramos y repintamos el mapa
 		// esto para eliminar cualquier pin antes puesto
 		var mapOptions = {
@@ -125,7 +125,7 @@ function getRemiserias(Ubicacion) {
 			$('#idAgencia').val(this.Agencia.AgenciaID);
 			$('#idTarifa').val(this.Agencia.Tarifa.ID);
 			$('#btn-solcitar-remis')[0].disabled = false;
-			$('#importeTotal').val('$' + importe.toFixed(2).toString());
+			$('#importeTotal').val(importe.toFixed(2).toString());
 			infoWindow = new google.maps.InfoWindow({
 				content: "<div class='colorBlack'><h3>" + this.Agencia.Nombre + "</h3><p>" + this.Agencia.infoAgencia + "</p> </div>"
 			});
@@ -250,7 +250,7 @@ function initMap(isindex) {
 		service = new google.maps.DistanceMatrixService();
 
 		directionsDisplay.addListener('directions_changed', function () {
-			distanceElement = $('#distancia').val((directionsDisplay.getDirections().routes[0].legs[0].distance.value / 1000).toFixed(1) + " Km");
+			distanceElement = $('#distancia').val((directionsDisplay.getDirections().routes[0].legs[0].distance.value / 1000).toFixed(1));
 			var data =directionsDisplay.getDirections().routes[0].legs[0];
 			setPanelData(data);
 
@@ -346,17 +346,17 @@ function initMap(isindex) {
 		});
 	}
 	function setPanelData(data) { // esta funcion tenia mil cosas y las fui acomodando en otras funciones, quedo re pete con dos lineas.
-		$('#destinocoordenada').val("Lat:" + data.end_location.lat().toString() + ",Lng:" + data.end_location.lng().toString());
-		$('#destinoTexto').val(data.end_address);
-        $('#origencoordenada').val("Lat:" + data.start_location.lat().toString() + ",Lng:" + data.start_location.lng().toString());
-        $('#origenTexto').val(data.start_address);
+		$('#DestinoCoordenadas').val("Lat:" + data.end_location.lat().toString() + ",Lng:" + data.end_location.lng().toString());
+		$('#DestinoDireccion').val(data.end_address);
+        $('#OrigenCoordenadas').val("Lat:" + data.start_location.lat().toString() + ",Lng:" + data.start_location.lng().toString());
+        $('#OrigenDireccion').val(data.start_address);
 	}
 
 	function geocodeLatLng(geocoder, map, latLng) {// <--infowindow-->) {
 		var latlng = latLng;
 		if (isindex)
 		{
-			$('#origencoordenada').val("Lat:" + latLng.lat().toString() + ",Lng:" + latLng.lng().toString());
+			$('#OrigenCoordenadas').val("Lat:" + latLng.lat().toString() + ",Lng:" + latLng.lng().toString());
 
 
 			geocoder.geocode({ 'location': latlng }, function (results, status) {
@@ -364,7 +364,7 @@ function initMap(isindex) {
 				{
 					if (results[0])
 					{
-						$('#origenTexto').val(results[0].formatted_address);
+						$('#OrigenDireccion').val(results[0].formatted_address);
 					}
 					else
 					{

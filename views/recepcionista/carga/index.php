@@ -22,33 +22,26 @@ use app\models\Vehiculos;
 use app\models\Agencias;
 use app\models\Tarifas;
 
-/*AppAssetRecepcionista::register($this);
-raoul2000\bootswatch\BootswatchAsset::$theme = 'superhero';*/
+$this->title = 'Viajes';
+$this->params['breadcrumbs'][] = $this->title;
 /* @var $this yii\web\View */
-$this->title = 'RemisYa';
 Modal::begin([
-'header' => '<h4>Mensaje</h4>',
-'id'=>'processmodal',
-'size'=>'modal-sm',
-'options'=>['class'=>'modal']
-]);
-echo "Procesando...";
-Modal::end();
+    'header' => '<h4>Mensaje</h4>',
+    'id'=>'processmodal',
+    'size'=>'modal-sm',
+    'options'=>['class'=>'modal']]);echo "Procesando...";Modal::end();
 ?>
 
-<?php if (Yii::$app->session->hasFlash('viajeCreado')): ?>
+
+
+<div class="personas-index">
+    <div id="ajaxCrudDatatable">
+    <?php if (Yii::$app->session->hasFlash('viajeCreado')): ?>
     <div class="alert alert-dismissible alert-success">
     <button type="button" class="close" data-dismiss="alert">&times;</button>
     <strong>Operacion exitosa!</strong>
     <a href="#" class="alert-link">Viaje creado correctamente</a>.
     </div><?php endif ?>
-
-<div class="panel panel-primary">
-    <div class="panel-heading">
-        <h4 class="panel-title">Administrador de Viajes</h4>
-    </div>
-    <div class="panel-body">
-        <div class="row">
             <?php $form = ActiveForm::begin(); ?>
                 <div class="col-lg-8">
                     <div class="panel panel-default">
@@ -103,11 +96,11 @@ Modal::end();
                                     <div class="form-group">
                                         <label class="control-label">Tarifa automatica x Km</label>
                                         <div class="input-group">
-                                            <span class="input-group-addon" style="background-color:#2b3e50">$</span>
-
+                                            <span class="input-group-addon" style="background-color:#325d88">$</span>
+                                            <?= Html::input('text', 'PrecioKM', Agencias::getTarifaVigente()->PrecioKM, ['class' => 'form-control','id'=>'precioKM']) ?>
                                             <span class="input-group-btn">
                                                 <?=
-                                                Html::button('Calcular', ['class'=>'btn btn-primary', 'onclick' => '$("#importetotal").val((('.Agencias::getTarifa()->PrecioKM.')*($("#distancia").val().replace(" Km",""))).toFixed(0) + " $");'])
+                                                Html::button('Calcular', ['class'=>'btn btn-primary', 'onclick' => '$("#importetotal").val((('.Agencias::getTarifaVigente()->PrecioKM.')*($("#distancia").val().replace(" Km",""))).toFixed(0));'])
                                                 ?>
                                             </span>
                                         </div>
@@ -126,15 +119,12 @@ Modal::end();
                                 </div>
                             </div>
                             <?= $form->field($model, 'Comentario')->textArea(['rows' => '4']) ?>
-                            <?= Html::submitButton('Crear Viaje', ['class' => 'btn btn-lg btn-primary','onclick'=>'$("#processmodal").modal("show");$.post( "'.Url::to(['recepcionista/alta_viaje_manual']).'", function() {$("#processmodal").modal("hide");});']); ?>
-                            <?= Html::a('Ver Viajes', ['/recepcionista/listaviajes'], ['class'=>'btn btn-lg btn-primary']) ?>
-                            <?= Html::a('Ver Solicitudes', ['/recepcionista/listasolicitudes'], ['class'=>'btn btn-lg btn-primary']) ?>
+                            <?= Html::submitButton('Crear Viaje', ['class' => 'btn btn-lg btn-primary','onclick'=>'$("#processmodal").modal("show");$.post( "'.Url::to(['recepcionista/carga/index']).'", function() {$("#processmodal").modal("hide");});']); ?>
+                            <?= Html::a('Ver Viajes', ['recepcionista/viajes/index'], ['class'=>'btn btn-lg btn-primary']) ?>
                             </fieldset>
                         </div>
                     </div>
                 </div>
             <?php ActiveForm::end(); ?>
-
-        </div>
     </div>
 </div>

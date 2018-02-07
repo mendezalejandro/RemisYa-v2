@@ -10,6 +10,8 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
+use app\models\Personas;
+use app\models\Agencias;
 
 /**
  * ViajesController implements the CRUD actions for Viajes model.
@@ -68,55 +70,14 @@ class CargaController extends Controller
     {
         $request = Yii::$app->request;
         $model = new Viajes();  
-
-        if($request->isAjax){
-            /*
-            *   Process for ajax request
-            */
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            if($request->isGet){
-                return [
-                    'title'=> "Create new Viajes",
-                    'content'=>$this->renderAjax('index', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
-            }else if($model->load($request->post()) && $model->save()){
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new Viajes",
-                    'content'=>'<span class="text-success">Create Viajes success</span>',
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
-        
-                ];         
-            }else{           
-                return [
-                    'title'=> "Create new Viajes",
-                    'content'=>$this->render('index', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
-            }
-        }else{
-            /*
-            *   Process for non-ajax request
-            */
-            if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->ViajeID]);
-            } else {
-                return $this->render('index', [
-                    'model' => $model,
-                ]);
-            }
+        $model->AgenciaID = Yii::$app->user->identity->agencia;
+        $model->TurnoID = Personas::getTurnoVigente()->TurnoID;
+        $model->TarifaID = Agencias::getTarifaVigente()->TarifaID;
+        if ($model->load(Yii::$app->request->post()) && ($model->save())) {
+            Yii::$app->session->setFlash('viajeCreado');
+            return $this->refresh();
         }
-       
+        return $this->render("index", ['model' => $model]);
     }
 
     /**

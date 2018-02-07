@@ -126,7 +126,7 @@ class Agencias extends \yii\db\ActiveRecord
         ->all();
         return $result[0];
     }
-    public static function getTarifa()
+    public static function getTarifaVigente()
     {
         $result = Tarifas::find()
         ->andWhere(['=', 'AgenciaID', Yii::$app->user->identity->agencia])

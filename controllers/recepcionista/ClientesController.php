@@ -15,7 +15,7 @@ use yii\helpers\Html;
 /**
  * PersonasController implements the CRUD actions for Personas model.
  */
-class CargaController extends Controller
+class ClientesController extends Controller
 {
     const Cliente = 4;
     public $layout = "mainRecepcionista";
