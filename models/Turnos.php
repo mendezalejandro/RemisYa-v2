@@ -34,11 +34,11 @@ class Turnos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['PersonaID', 'Estado'], 'required'],
-            [['PersonaID', 'AgenciaID', 'Estado'], 'integer'],
+            [['UsuarioID', 'Estado'], 'required'],
+            [['UsuarioID', 'AgenciaID', 'Estado'], 'integer'],
             [['FechaApertura', 'FechaCierre'], 'safe'],
             [['AgenciaID'], 'exist', 'skipOnError' => true, 'targetClass' => Agencias::className(), 'targetAttribute' => ['AgenciaID' => 'AgenciaID']],
-            [['PersonaID'], 'exist', 'skipOnError' => true, 'targetClass' => Personas::className(), 'targetAttribute' => ['PersonaID' => 'PersonaID']],
+            [['UsuarioID'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['UsuarioID' => 'UsuarioID']],
         ];
     }
 
@@ -49,7 +49,7 @@ class Turnos extends \yii\db\ActiveRecord
     {
         return [
             'TurnoID' => 'Turno ID',
-            'PersonaID' => 'Persona ID',
+            'UsuarioID' => 'Persona ID',
             'FechaApertura' => 'Fecha Apertura',
             'FechaCierre' => 'Fecha Cierre',
             'AgenciaID' => 'Agencia ID',
@@ -70,7 +70,7 @@ class Turnos extends \yii\db\ActiveRecord
      */
     public function getPersona()
     {
-        return $this->hasOne(Personas::className(), ['PersonaID' => 'PersonaID']);
+        return $this->hasOne(Usuarios::className(), ['UsuarioID' => 'UsuarioID']);
     }
 
     /**

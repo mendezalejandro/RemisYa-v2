@@ -27,7 +27,7 @@ CrudAsset::register($this);
             'toolbar'=> [
                 ['content'=>
                     Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'],
-                    ['role'=>'modal-remote','title'=> 'Create new Personas','class'=>'btn btn-default']).
+                    ['role'=>'modal-remote','title'=> 'Agregar Empleado','class'=>'btn btn-default']).
                     Html::a('<i class="glyphicon glyphicon-repeat"></i>', [''],
                     ['data-pjax'=>1, 'class'=>'btn btn-default', 'title'=>'Reset Grid']).
                     '{toggleData}'.
@@ -44,7 +44,7 @@ CrudAsset::register($this);
             'responsive' => true,         
             'panel' => [
                 'type' => 'primary', 
-                'heading' => '<i class="glyphicon glyphicon-list"></i> Personas',
+                'heading' => '<i class="glyphicon glyphicon-list"></i> Empleados',
                 'before'=>'<em></em>',
             ]
         ])?>

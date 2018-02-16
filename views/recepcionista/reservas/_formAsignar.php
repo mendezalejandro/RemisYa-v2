@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use app\models\Personas;
+use app\models\Usuarios;
 use app\models\Vehiculos;
 use kartik\select2\Select2;
 /* @var $this yii\web\View */
@@ -14,7 +14,7 @@ use kartik\select2\Select2;
 
     <?php $form = ActiveForm::begin(); ?>
 <?= $form->field($model, 'ChoferID')->widget(Select2::classname(), [
-    'data' => (\yii\helpers\ArrayHelper::map(Personas::getChoferesDisponibles(), 'PersonaID', function($model) {return $model['Nombre'].' '.$model['Apellido'];})),
+    'data' => (\yii\helpers\ArrayHelper::map(Usuarios::getChoferesDisponibles(), 'UsuarioID', function($model) {return $model['Nombre'].' '.$model['Apellido'];})),
     'language' => 'es',
     'options' => ['placeholder' => 'Seleccione un vehiculo ...'],
     'pluginOptions' => [
@@ -30,8 +30,8 @@ use kartik\select2\Select2;
     ],
 ])->label('Vehiculo'); ?>
 
-    <?= $form->field($model, 'PersonaID')->widget(Select2::classname(), [
-    'data' => \yii\helpers\ArrayHelper::map(Personas::getClientes(), 'PersonaID', function($model) {
+    <?= $form->field($model, 'UsuarioID')->widget(Select2::classname(), [
+    'data' => \yii\helpers\ArrayHelper::map(Usuarios::getClientes(), 'UsuarioID', function($model) {
         return $model['Nombre'].' '.$model['Apellido'];}),
     'language' => 'es',
     'options' => ['placeholder' => 'Seleccione un cliente ...'],

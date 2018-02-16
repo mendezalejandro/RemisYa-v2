@@ -3,26 +3,25 @@
 use yii\widgets\DetailView;
 include \Yii::$app->basePath.'/models/Constantes.php';
 /* @var $this yii\web\View */
-/* @var $model app\models\Personas */
+/* @var $model app\models\Usuarios */
 ?>
-<div class="personas-view">
+<div class="clientes-view">
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'Usuario',
-            'Password',
-            'Telefono',
             'Nombre',
             'Apellido',
             'Documento',
+            'Codigo',
+            'Telefono',
             'Email:email',
             ['label' => 'Estado',
             'value'=>function ($model){
                     switch($model->Estado) {
-                       case PersonaEstado::Habilitado:
+                       case UsuarioEstado::Habilitado:
                            $value = "Habilitado";
                            break;
-                           case PersonaEstado::Deshabilitado:
+                           case UsuarioEstado::Deshabilitado:
                            $value = "Deshabilitado";
                            break;
                        }

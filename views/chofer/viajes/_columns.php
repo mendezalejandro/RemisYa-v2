@@ -14,13 +14,13 @@ return [
     ],
      /*[
          'class'=>'\kartik\grid\DataColumn',
-         'attribute'=>'PersonaID',
+         'attribute'=>'UsuarioID',
          'value'=>'persona.Nombre',
          'label'=>'Cliente Nombre',
      ],*/
      [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'PersonaID',
+        'attribute'=>'UsuarioID',
         'value'=>'persona.Apellido',
         'label'=>'Cliente Apellido',
      ],

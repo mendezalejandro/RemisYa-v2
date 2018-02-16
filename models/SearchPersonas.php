@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Personas;
+use app\models\Usuarios;
 
 /**
- * SearchPersonas represents the model behind the search form about `app\models\Personas`.
+ * SearchPersonas represents the model behind the search form about `app\models\Usuarios`.
  */
-class SearchPersonas extends Personas
+class SearchPersonas extends Usuarios
 {
     /**
      * @inheritdoc
@@ -18,7 +18,7 @@ class SearchPersonas extends Personas
     public function rules()
     {
         return [
-            [['PersonaID', 'RolID', 'Estado'], 'integer'],
+            [['UsuarioID', 'RolID', 'Estado'], 'integer'],
             [['Usuario', 'Password', 'Telefono', 'Nombre', 'Apellido', 'Documento', 'Email'], 'safe'],
         ];
     }
@@ -41,7 +41,7 @@ class SearchPersonas extends Personas
      */
     public function search($params)
     {
-        $query = Personas::find();
+        $query = Usuarios::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -56,7 +56,7 @@ class SearchPersonas extends Personas
         }
 
         $query->andFilterWhere([
-            'PersonaID' => $this->PersonaID,
+            'UsuarioID' => $this->UsuarioID,
             'RolID' => $this->RolID,
             'Estado' => $this->Estado,
         ]);

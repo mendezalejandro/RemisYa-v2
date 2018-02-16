@@ -3,8 +3,8 @@
 namespace app\controllers\recepcionista;
 
 use Yii;
-use app\models\Personas;
-use app\models\AgenciasPersonas;
+use app\models\Clientes;
+use app\models\UsuariosAgencia;
 use app\models\SearchClientes;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -17,7 +17,6 @@ use yii\helpers\Html;
  */
 class ClientesController extends Controller
 {
-    const Cliente = 4;
     public $layout = "mainRecepcionista";
     /**
      * @inheritdoc
@@ -85,8 +84,7 @@ class ClientesController extends Controller
     public function actionCreate()
     {
         $request = Yii::$app->request;
-        $model = new Personas();  
-        $model->RolID = self::Cliente;
+        $model = new Clientes();  
         if($request->isAjax){
             /*
             *   Process for ajax request
@@ -103,11 +101,11 @@ class ClientesController extends Controller
         
                 ];         
             }else if($model->load($request->post()) && $model->save()){
-                $agenciaPersona = new AgenciasPersonas();
+               /* $agenciaPersona = new UsuariosAgencia();
                 $agenciaPersona->load($request->post());
                 $agenciaPersona->AgenciaID = Yii::$app->user->identity->agencia;
-                $model->link('agenciaspersonas', $agenciaPersona);
-
+                $model->link('usuariosagencia', $agenciaPersona);
+*/
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Crear Cliente",
@@ -132,7 +130,7 @@ class ClientesController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->PersonaID]);
+                return $this->redirect(['view', 'id' => $model->ClienteID]);
             } else {
                 return $this->render('create', [
                     'model' => $model,
@@ -193,7 +191,7 @@ class ClientesController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->PersonaID]);
+                return $this->redirect(['view', 'id' => $model->ClienteID]);
             } else {
                 return $this->render('update', [
                     'model' => $model,
@@ -213,7 +211,7 @@ class ClientesController extends Controller
     {
         $request = Yii::$app->request;
         $model = $this->findModel($id);
-        foreach($model->agenciaspersonas as $q)
+        foreach($model->usuariosagencia as $q)
         $q->delete();
 
         $model->delete();
@@ -274,7 +272,7 @@ class ClientesController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Personas::findOne($id)) !== null) {
+        if (($model = Clientes::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -3,8 +3,8 @@
 namespace app\controllers\administrador;
 
 use Yii;
-use app\models\Personas;
-use app\models\AgenciasPersonas;
+use app\models\Usuarios;
+use app\models\UsuariosAgencia;
 use app\models\SearchEmpleados;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -84,7 +84,7 @@ class EmpleadosController extends Controller
     public function actionCreate()
     {
         $request = Yii::$app->request;
-        $model = new Personas();  
+        $model = new Usuarios();  
 
         if($request->isAjax){
             /*
@@ -102,10 +102,10 @@ class EmpleadosController extends Controller
         
                 ];         
             }else if($model->load($request->post()) && $model->save()){
-                $agenciaPersona = new AgenciasPersonas();
+                $agenciaPersona = new UsuariosAgencia();
                 $agenciaPersona->load($request->post());
                 $agenciaPersona->AgenciaID = Yii::$app->user->identity->agencia;
-                $model->link('agenciaspersonas', $agenciaPersona);
+                $model->link('usuariosagencia', $agenciaPersona);
                 return [
                     'forceReload'=>'#crud-datatable-pjax',
                     'title'=> "Crear Empleado",
@@ -130,7 +130,7 @@ class EmpleadosController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->PersonaID]);
+                return $this->redirect(['view', 'id' => $model->UsuarioID]);
             } else {
                 return $this->render('create', [
                     'model' => $model,
@@ -190,7 +190,7 @@ class EmpleadosController extends Controller
             *   Process for non-ajax request
             */
             if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->PersonaID]);
+                return $this->redirect(['view', 'id' => $model->UsuarioID]);
             } else {
                 return $this->render('update', [
                     'model' => $model,
@@ -209,7 +209,7 @@ class EmpleadosController extends Controller
     {
         $request = Yii::$app->request;
         $model = $this->findModel($id);
-        foreach($model->agenciaspersonas as $q)
+        foreach($model->usuariosagencia as $q)
         $q->delete();
 
         $model->delete();
@@ -270,7 +270,7 @@ class EmpleadosController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Personas::findOne($id)) !== null) {
+        if (($model = Usuarios::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

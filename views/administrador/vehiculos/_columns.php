@@ -31,10 +31,10 @@ return [
         'attribute'=>'Estado',
         'value'=>function ($model){
            switch($model->Estado) {
-              case PersonaEstado::Habilitado:
+              case UsuarioEstado::Habilitado:
                   $value = "Habilitado";
                   break;
-                  case PersonaEstado::Deshabilitado:
+                  case UsuarioEstado::Deshabilitado:
                   $value = "Deshabilitado";
                   break;
               }

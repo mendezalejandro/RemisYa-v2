@@ -17,7 +17,8 @@ use yii\helpers\Url;
 use yii\web\JsExpression;
 use yii\widgets\Pjax;
 use kartik\select2\Select2;
-use app\models\Personas;
+use app\models\Usuarios;
+use app\models\Clientes;
 use app\models\Vehiculos;
 use app\models\Agencias;
 use app\models\Tarifas;
@@ -81,8 +82,8 @@ Modal::begin([
                         </div>
                         <div class="panel-body">
                             <fieldset>
-                            <?=$form->field($model, 'PersonaID')->widget(Select2::classname(), [
-                                'data' => \yii\helpers\ArrayHelper::map(Personas::getClientes(), 'PersonaID', function($model) {
+                            <?=$form->field($model, 'ClienteID')->widget(Select2::classname(), [
+                                'data' => \yii\helpers\ArrayHelper::map(Clientes::find()->all(), 'ClienteID', function($model) {
                                     return $model['Nombre'].' '.$model['Apellido'];}),
                                 'language' => 'es',
                                 'options' => ['placeholder' => 'Seleccione un cliente ...'],
@@ -108,7 +109,7 @@ Modal::begin([
                                 </div>
                             </div>
                             <?= $form->field($model, 'ImporteTotal')->input("text", ['maxlength' => '50','id' => 'importetotal'])->label("Importe aproximado"); ?>
-                            <?= $form->field($model, 'ChoferID')->dropDownList(\yii\helpers\ArrayHelper::map(Personas::getChoferesDisponibles(), 'PersonaID', function($model) {return $model['Nombre'].' '.$model['Apellido'];}))->label('Chofer') ?>
+                            <?= $form->field($model, 'ChoferID')->dropDownList(\yii\helpers\ArrayHelper::map(Usuarios::getChoferesDisponibles(), 'UsuarioID', function($model) {return $model['Nombre'].' '.$model['Apellido'];}))->label('Chofer') ?>
                             <?= $form->field($model, 'VehiculoID')->dropDownList(\yii\helpers\ArrayHelper::map(Vehiculos::getVehiculosDisponibles(), 'VehiculoID', function($model) {return $model['Marca'].' '.$model['Modelo'];}))->label('Vehiculo') ?>
                             <div class="row">
                                 <div class="col-md-6">

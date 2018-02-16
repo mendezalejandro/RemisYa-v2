@@ -22,7 +22,7 @@ class SearchReservas extends Viajes
     {
         return [
             [['ViajeID', 'ChoferID', 'TarifaID', 'TurnoID', 'AgenciaID',  'ViajeTipo', 'Estado'], 'integer'],
-            [['nombreCompleto', 'FechaEmision', 'VehiculoID','PersonaID','FechaSalida', 'OrigenCoordenadas', 'DestinoCoordenadas', 'OrigenDireccion', 'DestinoDireccion', 'Comentario'], 'safe'],
+            [['nombreCompleto', 'FechaEmision', 'VehiculoID','UsuarioID','FechaSalida', 'OrigenCoordenadas', 'DestinoCoordenadas', 'OrigenDireccion', 'DestinoDireccion', 'Comentario'], 'safe'],
             [['ImporteTotal', 'Distancia'], 'number'],
         ];
     }
@@ -51,7 +51,7 @@ class SearchReservas extends Viajes
             'query' => $query,
         ]);
         $query->joinWith(['vehiculo']);
-        $query->joinWith(['persona']);
+        $query->joinWith(['usuario']);
         //$query->join('LEFT OUTER JOIN', 'personas', 'personas.PersonaID=Viajes.PersonaID');
 
         /*$dataProvider->setSort([
@@ -97,7 +97,7 @@ class SearchReservas extends Viajes
 
             if($this->nombreCompleto != "")
             {
-                $query->andWhere('(Personas.Nombre LIKE "%' . $this->nombreCompleto . '%" ' .'OR Personas.Apellido LIKE "%' . $this->nombreCompleto . '%")');
+                $query->andWhere('(Usuarios.Nombre LIKE "%' . $this->nombreCompleto . '%" ' .'OR Usuarios.Apellido LIKE "%' . $this->nombreCompleto . '%")');
             }
             $query->orderBy(['Viajes.FechaEmision'=>SORT_DESC]);
         return $dataProvider;

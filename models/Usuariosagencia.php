@@ -5,22 +5,22 @@ namespace app\models;
 use Yii;
 
 /**
- * This is the model class for table "agenciaspersonas".
+ * This is the model class for table "usuariosagencia".
  *
  * @property int $AgenciaID
- * @property int $PersonaID
+ * @property int $UsuarioID
  *
  * @property Agencias $agencia
- * @property Personas $persona
+ * @property Usuarios $usuario
  */
-class Agenciaspersonas extends \yii\db\ActiveRecord
+class Usuariosagencia extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'agenciaspersonas';
+        return 'usuariosagencia';
     }
 
     /**
@@ -29,11 +29,11 @@ class Agenciaspersonas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['AgenciaID', 'PersonaID'], 'required'],
-            [['AgenciaID', 'PersonaID'], 'integer'],
-            [['AgenciaID', 'PersonaID'], 'unique', 'targetAttribute' => ['AgenciaID', 'PersonaID']],
+            [['AgenciaID', 'UsuarioID'], 'required'],
+            [['AgenciaID', 'UsuarioID'], 'integer'],
+            [['AgenciaID', 'UsuarioID'], 'unique', 'targetAttribute' => ['AgenciaID', 'UsuarioID']],
             [['AgenciaID'], 'exist', 'skipOnError' => true, 'targetClass' => Agencias::className(), 'targetAttribute' => ['AgenciaID' => 'AgenciaID']],
-            [['PersonaID'], 'exist', 'skipOnError' => true, 'targetClass' => Personas::className(), 'targetAttribute' => ['PersonaID' => 'PersonaID']],
+            [['UsuarioID'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['UsuarioID' => 'UsuarioID']],
         ];
     }
 
@@ -44,7 +44,7 @@ class Agenciaspersonas extends \yii\db\ActiveRecord
     {
         return [
             'AgenciaID' => 'Agencia ID',
-            'PersonaID' => 'Persona ID',
+            'UsuarioID' => 'Usuario ID',
         ];
     }
 
@@ -59,8 +59,8 @@ class Agenciaspersonas extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPersona()
+    public function getUsuario()
     {
-        return $this->hasOne(Personas::className(), ['PersonaID' => 'PersonaID']);
+        return $this->hasOne(Usuarios::className(), ['UsuarioID' => 'UsuarioID']);
     }
 }

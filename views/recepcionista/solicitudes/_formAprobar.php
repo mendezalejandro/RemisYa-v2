@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use app\models\Personas;
+use app\models\Usuarios;
 use app\models\Vehiculos;
 /* @var $this yii\web\View */
 
@@ -13,7 +13,7 @@ use app\models\Vehiculos;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'ChoferID')->dropDownList(\yii\helpers\ArrayHelper::map(Personas::getChoferesDisponibles(), 'PersonaID', function($model) {
+    <?= $form->field($model, 'ChoferID')->dropDownList(\yii\helpers\ArrayHelper::map(Usuarios::getChoferesDisponibles(), 'UsuarioID', function($model) {
         return $model['Nombre'].' '.$model['Apellido'];
     })) ?>
 

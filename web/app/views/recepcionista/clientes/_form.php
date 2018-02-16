@@ -1,10 +1,9 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-include \Yii::$app->basePath.'/models/Constantes.php';
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Usuarios */
+/* @var $model app\models\Clientes */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -18,17 +17,18 @@ include \Yii::$app->basePath.'/models/Constantes.php';
 
     <?= $form->field($model, 'Documento')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'Codigo')->textInput(['maxlength' => true]) ?>
-
     <?= $form->field($model, 'Telefono')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'Email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'Estado')->dropDownList(['prompt' => 'Seleccione un estado',UsuarioEstado::Habilitado => 'Habilitado', UsuarioEstado::Deshabilitado => 'Deshabilitado']) ?>
+    <?= $form->field($model, 'Estado')->textInput() ?>
+
+    <?= $form->field($model, 'Codigo')->textInput(['maxlength' => true]) ?>
+
   
 	<?php if (!Yii::$app->request->isAjax){ ?>
 	  	<div class="form-group">
-	        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+	        <?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Modificar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
 	    </div>
 	<?php } ?>
 

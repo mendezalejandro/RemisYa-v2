@@ -4,7 +4,7 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Personas */
+/* @var $model app\models\Usuarios */
 
 ?>
 <div class="personas-create">

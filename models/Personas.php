@@ -67,7 +67,7 @@ class Personas extends \yii\db\ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'PersonaID' => 'Persona ID',
+            'UsuarioID' => 'Persona ID',
             'Usuario' => 'Usuario',
             'Password' => 'Password',
             'Telefono' => 'Telefono',
@@ -85,7 +85,7 @@ class Personas extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getAgenciaspersonas()
     {
-        return $this->hasMany(Agenciaspersonas::className(), ['PersonaID' => 'PersonaID']);
+        return $this->hasMany(Agenciaspersonas::className(), ['UsuarioID' => 'UsuarioID']);
     }
 
     /**
@@ -93,7 +93,7 @@ class Personas extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getAgencias()
     {
-        return $this->hasMany(Agencias::className(), ['AgenciaID' => 'AgenciaID'])->viaTable('agenciaspersonas', ['PersonaID' => 'PersonaID']);
+        return $this->hasMany(Agencias::className(), ['AgenciaID' => 'AgenciaID'])->viaTable('agenciaspersonas', ['UsuarioID' => 'UsuarioID']);
     }
 
     public function getAgencia()
@@ -106,7 +106,7 @@ class Personas extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getCalificaciones()
     {
-        return $this->hasMany(Calificaciones::className(), ['ParaQuien' => 'PersonaID']);
+        return $this->hasMany(Calificaciones::className(), ['ParaQuien' => 'UsuarioID']);
     }
 
     /**
@@ -114,7 +114,7 @@ class Personas extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getCalificaciones0()
     {
-        return $this->hasMany(Calificaciones::className(), ['Quien' => 'PersonaID']);
+        return $this->hasMany(Calificaciones::className(), ['Quien' => 'UsuarioID']);
     }
 
     /**
@@ -130,7 +130,7 @@ class Personas extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getTurnos()
     {
-        return $this->hasMany(Turnos::className(), ['PersonaID' => 'PersonaID']);
+        return $this->hasMany(Turnos::className(), ['UsuarioID' => 'UsuarioID']);
     }
 
     /**
@@ -138,7 +138,7 @@ class Personas extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getViajes()
     {
-        return $this->hasMany(Viajes::className(), ['ChoferID' => 'PersonaID']);
+        return $this->hasMany(Viajes::className(), ['ChoferID' => 'UsuarioID']);
     }
 
     /**
@@ -146,7 +146,7 @@ class Personas extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getViajes0()
     {
-        return $this->hasMany(Viajes::className(), ['PersonaID' => 'PersonaID']);
+        return $this->hasMany(Viajes::className(), ['UsuarioID' => 'UsuarioID']);
     }
 
     public static function findIdentity($id)
@@ -174,7 +174,7 @@ class Personas extends \yii\db\ActiveRecord implements IdentityInterface
      */
     public function getId()
     {
-        return $this->PersonaID;
+        return $this->UsuarioID;
     }
 
     /**
@@ -250,7 +250,7 @@ class Personas extends \yii\db\ActiveRecord implements IdentityInterface
         $result = Turnos::find()
         ->andWhere(['=', 'AgenciaID', Yii::$app->user->identity->agencia])
         ->andWhere(['=', 'Estado', 0])
-        ->andWhere(['=', 'PersonaID', Yii::$app->user->identity->PersonaID])
+        ->andWhere(['=', 'UsuarioID', Yii::$app->user->identity->PersonaID])
         ->all();
         if(count($result)==0)
             return false;

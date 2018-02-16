@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Url;
 use yii\helpers\Html;
-use app\models\Personas;
+use app\models\Usuarios;
 include \Yii::$app->basePath.'/models/Constantes.php';
 return [
     [

@@ -10,7 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
-use app\models\Personas;
+use app\models\Usuarios;
 use app\models\Agencias;
 
 /**
@@ -71,8 +71,10 @@ class CargaController extends Controller
         $request = Yii::$app->request;
         $model = new Viajes();  
         $model->AgenciaID = Yii::$app->user->identity->agencia;
-        $model->TurnoID = Personas::getTurnoVigente()->TurnoID;
+        
+        $model->TurnoID = Usuarios::getTurnoVigente()->TurnoID;
         $model->TarifaID = Agencias::getTarifaVigente()->TarifaID;
+        
         if ($model->load(Yii::$app->request->post()) && ($model->save())) {
             Yii::$app->session->setFlash('viajeCreado');
             return $this->refresh();

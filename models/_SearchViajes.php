@@ -19,7 +19,7 @@ class SearchViajes extends Viajes
     {
         return [
             [['ViajeID', 'ChoferID', 'TarifaID', 'TurnoID', 'AgenciaID',  'ViajeTipo', 'Estado'], 'integer'],
-            [['FechaEmision', 'VehiculoID','PersonaID','FechaSalida', 'OrigenCoordenadas', 'DestinoCoordenadas', 'OrigenDireccion', 'DestinoDireccion', 'Comentario'], 'safe'],
+            [['FechaEmision', 'VehiculoID','UsuarioID','FechaSalida', 'OrigenCoordenadas', 'DestinoCoordenadas', 'OrigenDireccion', 'DestinoDireccion', 'Comentario'], 'safe'],
             [['ImporteTotal', 'Distancia'], 'number'],
         ];
     }
@@ -48,7 +48,7 @@ class SearchViajes extends Viajes
             'query' => $query,
         ]);
         $query->joinWith(['vehiculo']);
-        $query->joinWith(['persona']);
+        $query->joinWith(['usuario']);
         $this->load($params);
 
         if (!$this->validate()) {
@@ -77,8 +77,8 @@ class SearchViajes extends Viajes
             ->andFilterWhere(['like', 'DestinoDireccion', $this->DestinoDireccion])
             ->andFilterWhere(['like', 'Comentario', $this->Comentario])
             ->andFilterWhere(['like', 'Vehiculos.Marca', $this->VehiculoID])
-            //->andFilterWhere(['like', 'Personas.Nombre', $this->PersonaID])
-            ->andFilterWhere(['like', 'Personas.Apellido', $this->PersonaID]);
+            //->andFilterWhere(['like', 'Usuarios.Nombre', $this->UsuarioID])
+            ->andFilterWhere(['like', 'Usuarios.Apellido', $this->UsuarioID]);
 
         return $dataProvider;
     }

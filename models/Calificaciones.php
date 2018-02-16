@@ -42,8 +42,8 @@ class Calificaciones extends \yii\db\ActiveRecord
             [['Fecha'], 'safe'],
             [['Comentario'], 'string', 'max' => 200],
             [['AgenciaID'], 'exist', 'skipOnError' => true, 'targetClass' => Agencias::className(), 'targetAttribute' => ['AgenciaID' => 'AgenciaID']],
-            [['ParaQuien'], 'exist', 'skipOnError' => true, 'targetClass' => Personas::className(), 'targetAttribute' => ['ParaQuien' => 'PersonaID']],
-            [['Quien'], 'exist', 'skipOnError' => true, 'targetClass' => Personas::className(), 'targetAttribute' => ['Quien' => 'PersonaID']],
+            [['ParaQuien'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['ParaQuien' => 'UsuarioID']],
+            [['Quien'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['Quien' => 'UsuarioID']],
             [['ViajeID'], 'exist', 'skipOnError' => true, 'targetClass' => Viajes::className(), 'targetAttribute' => ['ViajeID' => 'ViajeID']],
         ];
     }
@@ -78,7 +78,7 @@ class Calificaciones extends \yii\db\ActiveRecord
      */
     public function getParaQuien()
     {
-        return $this->hasOne(Personas::className(), ['PersonaID' => 'ParaQuien']);
+        return $this->hasOne(Usuarios::className(), ['UsuarioID' => 'ParaQuien']);
     }
 
     /**
@@ -86,7 +86,7 @@ class Calificaciones extends \yii\db\ActiveRecord
      */
     public function getQuien()
     {
-        return $this->hasOne(Personas::className(), ['PersonaID' => 'Quien']);
+        return $this->hasOne(Usuarios::className(), ['UsuarioID' => 'Quien']);
     }
 
     /**

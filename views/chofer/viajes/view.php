@@ -16,7 +16,7 @@ use yii\widgets\DetailView;
             'TarifaID',
             'TurnoID',
             'AgenciaID',
-            'PersonaID',
+            'UsuarioID',
             'FechaEmision',
             'FechaSalida',
             'ViajeTipo',

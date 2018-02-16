@@ -5,25 +5,21 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Personas;
+use app\models\Clientes;
 //include \Yii::$app->basePath.'/models/Constantes.php';
 /**
- * SearchPersonas represents the model behind the search form about `app\models\Personas`.
+ * SearchPersonas represents the model behind the search form about `app\models\Usuarios`.
  */
-class SearchClientes extends Personas
+class SearchClientes extends Clientes
 {
-    const Administrador = 1;
-    const Recepcionista = 2;
-    const Chofer = 3;
-    const Cliente = 4;
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['PersonaID', 'RolID', 'Estado'], 'integer'],
-            [['Usuario', 'Password', 'Telefono', 'Nombre', 'Apellido', 'Documento', 'Email'], 'safe'],
+            [['ClienteID', 'Estado'], 'integer'],
+            [['Codigo', 'Telefono', 'Nombre', 'Apellido', 'Documento', 'Email'], 'safe'],
         ];
     }
 
@@ -45,13 +41,13 @@ class SearchClientes extends Personas
      */
     public function search($params)
     {
-        $query = Personas::find();
+        $query = Clientes::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
-        $query->joinWith(['agencias']);
+        //$query->joinWith(['agencias']);
 
         $this->load($params);
         if (!$this->validate()) {
@@ -61,14 +57,12 @@ class SearchClientes extends Personas
         }
 
         $query->andFilterWhere([
-            'PersonaID' => $this->PersonaID,
-            'RolID' => self::Cliente,
-            'Personas.Estado' => $this->Estado,
-            'Agencias.AgenciaID' => Yii::$app->user->identity->agencia,
+            'ClienteID' => $this->ClienteID,
+            'Estado' => $this->Estado,
+            //'Agencias.AgenciaID' => Yii::$app->user->identity->agencia,
         ]);
 
-        $query->andFilterWhere(['like', 'Usuario', $this->Usuario])
-            ->andFilterWhere(['like', 'Password', $this->Password])
+        $query->andFilterWhere(['like', 'Codigo', $this->Codigo])
             ->andFilterWhere(['like', 'Telefono', $this->Telefono])
             ->andFilterWhere(['like', 'Nombre', $this->Nombre])
             ->andFilterWhere(['like', 'Apellido', $this->Apellido])

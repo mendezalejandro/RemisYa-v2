@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'AgenciaID')->textInput() ?>
 
-    <?= $form->field($model, 'PersonaID')->textInput() ?>
+    <?= $form->field($model, 'UsuarioID')->textInput() ?>
 
     <?= $form->field($model, 'FechaEmision')->textInput() ?>
 

@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Url;
-use app\models\Personas;
+use app\models\Usuarios;
 use app\models\Vehiculos;
 include \Yii::$app->basePath.'/models/Constantes.php';
 return [
@@ -27,7 +27,7 @@ return [
         {return null;}
             else {return $model->chofer->Nombre. ' '. $model->chofer->Apellido;}},
          'label'=>'Chofer',
-         'filter' => \yii\helpers\ArrayHelper::map(Personas::getChoferes(), 'PersonaID', function($model) {return $model['Nombre'].' '.$model['Apellido'];}),
+         'filter' => \yii\helpers\ArrayHelper::map(Usuarios::getChoferes(), 'UsuarioID', function($model) {return $model['Nombre'].' '.$model['Apellido'];}),
      ],
      [
         'class'=>'\kartik\grid\DataColumn',

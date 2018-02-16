@@ -27,24 +27,24 @@ CrudAsset::register($this);
             'toolbar'=> [
                 ['content'=>
                     Html::a('<i class="glyphicon glyphicon-plus"></i>', ['create'],
-                    ['role'=>'modal-remote','title'=> 'Create new Clientes','class'=>'btn btn-default']).
+                    ['role'=>'modal-remote','title'=> 'Crear Clientes','class'=>'btn btn-default']).
                     Html::a('<i class="glyphicon glyphicon-repeat"></i>', [''],
-                    ['data-pjax'=>1, 'class'=>'btn btn-default', 'title'=>'Reset Grid']).
+                    ['data-pjax'=>1, 'class'=>'btn btn-default', 'title'=>'Resetear grilla']).
                     '{toggleData}'.
                     '{export}'
                 ],
-            ],          
+            ],
             'bordered' => true,
             'hover' => true,
             'rowOptions' => function ($model, $key, $index, $grid) {
                 return ['rowid' => $key, 'onclick' => '$(this).addClass("success").siblings().removeClass("success");','style' => 'cursor:pointer'];
-            },
+            },          
             'striped' => true,
             'condensed' => true,
-            'responsive' => true,         
+            'responsive' => true,          
             'panel' => [
                 'type' => 'primary', 
-                'heading' => '<i class="glyphicon glyphicon-list"></i> Clientes',
+                'heading' => '<i class="glyphicon glyphicon-list"></i> Clientes ',
                 'before'=>'<em></em>',
             ]
         ])?>

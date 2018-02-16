@@ -8,16 +8,16 @@ return [
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'Usuario',
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Nombre',
     ],
     [
          'class'=>'\kartik\grid\DataColumn',
          'attribute'=>'Apellido',
      ],
+     [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'Codigo',
+    ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'Telefono',
@@ -35,15 +35,15 @@ return [
          'attribute'=>'Estado',
          'value'=>function ($model){
             switch($model->Estado) {
-               case PersonaEstado::Habilitado:
+               case UsuarioEstado::Habilitado:
                    $value = "Habilitado";
                    break;
-                   case PersonaEstado::Deshabilitado:
+                   case UsuarioEstado::Deshabilitado:
                    $value = "Deshabilitado";
                    break;
                }
             return $value;},
-         'filter' => [ PersonaEstado::Habilitado => 'Habilitado', PersonaEstado::Deshabilitado => 'Deshabilitado'],
+         'filter' => [ UsuarioEstado::Habilitado => 'Habilitado', UsuarioEstado::Deshabilitado => 'Deshabilitado'],
      ],
     [
         'class' => 'kartik\grid\ActionColumn',

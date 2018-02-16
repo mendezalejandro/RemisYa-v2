@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Personas;
+use app\models\Usuarios;
 //include \Yii::$app->basePath.'/models/Constantes.php';
 /**
- * SearchPersonas represents the model behind the search form about `app\models\Personas`.
+ * SearchPersonas represents the model behind the search form about `app\models\Usuarios`.
  */
-class SearchEmpleados extends Personas
+class SearchEmpleados extends Usuarios
 {
     const Administrador = 1;
     const Recepcionista = 2;
@@ -22,7 +22,7 @@ class SearchEmpleados extends Personas
     public function rules()
     {
         return [
-            [['PersonaID', 'RolID', 'Estado'], 'integer'],
+            [['UsuarioID', 'RolID', 'Estado'], 'integer'],
             [['Usuario', 'Password', 'Telefono', 'Nombre', 'Apellido', 'Documento', 'Email'], 'safe'],
         ];
     }
@@ -45,7 +45,7 @@ class SearchEmpleados extends Personas
      */
     public function search($params)
     {
-        $query = Personas::find();
+        $query = Usuarios::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -61,9 +61,9 @@ class SearchEmpleados extends Personas
         }
 
         $query->andFilterWhere([
-            'PersonaID' => $this->PersonaID,
+            'UsuarioID' => $this->UsuarioID,
             'RolID' => $this->RolID,
-            'Personas.Estado' => $this->Estado,
+            'Usuarios.Estado' => $this->Estado,
             'Agencias.AgenciaID' => Yii::$app->user->identity->agencia,
         ]);
         //Para la grilla de Empleados del administrador traigo todos los usuarios de la agencia y que nos son Clientes.
@@ -72,7 +72,7 @@ class SearchEmpleados extends Personas
         $query->andFilterWhere(['like', 'Usuario', $this->Usuario])
             ->andFilterWhere(['like', 'Password', $this->Password])
             ->andFilterWhere(['like', 'Telefono', $this->Telefono])
-            ->andFilterWhere(['like', 'Personas.Nombre', $this->Nombre])
+            ->andFilterWhere(['like', 'Usuarios.Nombre', $this->Nombre])
             ->andFilterWhere(['like', 'Apellido', $this->Apellido])
             ->andFilterWhere(['like', 'Documento', $this->Documento])
             ->andFilterWhere(['like', 'Email', $this->Email]);

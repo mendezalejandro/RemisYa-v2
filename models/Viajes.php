@@ -9,11 +9,12 @@ use Yii;
  *
  * @property int $ViajeID
  * @property int $ChoferID
+ * @property int $RecepcionistaID
  * @property int $VehiculoID
  * @property int $TarifaID
  * @property int $TurnoID
  * @property int $AgenciaID
- * @property int $PersonaID Si el viaje Reservado es manualmente (Personal o por Telefono) el usuario puede ser NULL ya que no se tiene registro en ese momento.
+ * @property int $ClienteID Si el viaje Reservado es manualmente (Personal o por Telefono) el usuario puede ser NULL ya que no se tiene registro en ese momento.
  * @property string $FechaEmision
  * @property string $FechaSalida
  * @property int $ViajeTipo Viajes Reservados con la siguiente modalidad:  0 - Web 1 - Personal 2 - Telefonico
@@ -28,8 +29,9 @@ use Yii;
  *
  * @property Calificaciones[] $calificaciones
  * @property Agencias $agencia
- * @property Personas $chofer
- * @property Personas $persona
+ * @property Usuarios $chofer
+ * @property Usuarios $recepcionista
+ * @property Clientes $cliente
  * @property Tarifas $tarifa
  * @property Turnos $turno
  * @property Vehiculos $vehiculo
@@ -50,14 +52,15 @@ class Viajes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ChoferID', 'VehiculoID', 'TarifaID', 'TurnoID', 'AgenciaID', 'PersonaID', 'ViajeTipo', 'Estado'], 'integer'],
+            [['ChoferID', 'VehiculoID', 'TarifaID', 'TurnoID', 'AgenciaID', 'ClienteID', 'ViajeTipo', 'Estado','RecepcionistaID'], 'integer'],
             [['TarifaID', 'AgenciaID', 'ViajeTipo', 'Estado'], 'required'],
             [['FechaEmision', 'FechaSalida'], 'safe'],
             [['ImporteTotal', 'Distancia'], 'number'],
             [['OrigenCoordenadas', 'DestinoCoordenadas', 'OrigenDireccion', 'DestinoDireccion', 'Comentario'], 'string', 'max' => 200],
             [['AgenciaID'], 'exist', 'skipOnError' => true, 'targetClass' => Agencias::className(), 'targetAttribute' => ['AgenciaID' => 'AgenciaID']],
-            [['ChoferID'], 'exist', 'skipOnError' => true, 'targetClass' => Personas::className(), 'targetAttribute' => ['ChoferID' => 'PersonaID']],
-            [['PersonaID'], 'exist', 'skipOnError' => true, 'targetClass' => Personas::className(), 'targetAttribute' => ['PersonaID' => 'PersonaID']],
+            [['ChoferID'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['ChoferID' => 'UsuarioID']],
+            [['RecepcionistaID'], 'exist', 'skipOnError' => true, 'targetClass' => Usuarios::className(), 'targetAttribute' => ['RecepcionistaID' => 'UsuarioID']],
+            [['ClienteID'], 'exist', 'skipOnError' => true, 'targetClass' => Clientes::className(), 'targetAttribute' => ['ClienteID' => 'ClienteID']],
             [['TarifaID'], 'exist', 'skipOnError' => true, 'targetClass' => Tarifas::className(), 'targetAttribute' => ['TarifaID' => 'TarifaID']],
             [['TurnoID'], 'exist', 'skipOnError' => true, 'targetClass' => Turnos::className(), 'targetAttribute' => ['TurnoID' => 'TurnoID']],
             [['VehiculoID'], 'exist', 'skipOnError' => true, 'targetClass' => Vehiculos::className(), 'targetAttribute' => ['VehiculoID' => 'VehiculoID']],
@@ -72,11 +75,12 @@ class Viajes extends \yii\db\ActiveRecord
         return [
             'ViajeID' => 'Viaje ID',
             'ChoferID' => 'Chofer ID',
+            'RecepcionistaID' => 'Recepcionista ID',
             'VehiculoID' => 'Vehiculo ID',
             'TarifaID' => 'Tarifa ID',
             'TurnoID' => 'Turno ID',
             'AgenciaID' => 'Agencia ID',
-            'PersonaID' => 'Persona ID',
+            'ClienteID' => 'Cliente ID',
             'FechaEmision' => 'Fecha Emision',
             'FechaSalida' => 'Fecha Salida',
             'ViajeTipo' => 'Viaje Tipo',
@@ -113,23 +117,29 @@ class Viajes extends \yii\db\ActiveRecord
      */
     public function getChofer()
     {
-        return $this->hasOne(Personas::className(), ['PersonaID' => 'ChoferID']);
+        return $this->hasOne(Usuarios::className(), ['UsuarioID' => 'ChoferID']);
     }
-
+    public function getRecepcionista()
+    {
+        return $this->hasOne(Usuarios::className(), ['UsuarioID' => 'RecepcionistaID']);
+    }
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPersona()
+    public function getCliente()
     {
-        return $this->hasOne(Personas::className(), ['PersonaID' => 'PersonaID']);
+        return $this->hasOne(Clientes::className(), ['ClienteID' => 'ClienteID']);
     }
-
+    public function getUsuario()
+    {
+        return $this->hasOne(Usuarios::className(), ['UsuarioID' => 'ClienteID']);
+    }
     public function getNombreCompleto() {
-        if($this->persona == null){
+        if($this->usuario == null){
             return "";
         }
         else{
-            return $this->persona->Nombre . ' ' . $this->persona->Apellido;
+            return $this->usuario->Nombre . ' ' . $this->usuario->Apellido;
         }
         
     }

@@ -3,7 +3,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 include \Yii::$app->basePath.'/models/Constantes.php';
 /* @var $this yii\web\View */
-/* @var $model app\models\Personas */
+/* @var $model app\models\Usuarios */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -27,7 +27,7 @@ include \Yii::$app->basePath.'/models/Constantes.php';
 
     <?= $form->field($model, 'RolID')->dropDownList(['prompt' => 'Seleccione un rol', TipoUsuario::Administrador => 'Administrador', TipoUsuario::Recepcionista => 'Recepcionista', TipoUsuario::Chofer => 'Chofer'])->label('Rol') ?>
 
-    <?= $form->field($model, 'Estado')->dropDownList(['prompt' => 'Seleccione un estado',PersonaEstado::Habilitado => 'Habilitado', PersonaEstado::Deshabilitado => 'Deshabilitado']) ?>
+    <?= $form->field($model, 'Estado')->dropDownList(['prompt' => 'Seleccione un estado',UsuarioEstado::Habilitado => 'Habilitado', UsuarioEstado::Deshabilitado => 'Deshabilitado']) ?>
 
   
 	<?php if (!Yii::$app->request->isAjax){ ?>

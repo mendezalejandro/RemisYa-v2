@@ -19,7 +19,7 @@ class TipoUsuario
       const Cancelado = 2;
       const Finalizado = 3;
   }
-  class PersonaEstado
+  class UsuarioEstado
   {
       const Habilitado = 0;
       const Deshabilitado = 1;

@@ -3,7 +3,7 @@
 namespace app\models;
 
 use Yii;
-
+use yii\base\Exception;
 /**
  * This is the model class for table "agencias".
  *
@@ -14,8 +14,8 @@ use Yii;
  * @property integer $Estado
  * @property string $CUIT
  *
- * @property Agenciaspersonas[] $agenciaspersonas
- * @property Personas[] $personas
+ * @property Usuariosagencia[] $usuariosagencia
+ * @property Usuarios[] $usuarios
  * @property Calificaciones[] $calificaciones
  * @property Tarifas[] $tarifas
  * @property Turnos[] $turnos
@@ -65,17 +65,17 @@ class Agencias extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAgenciaspersonas()
+    public function getUsuariosagencia()
     {
-        return $this->hasMany(Agenciaspersonas::className(), ['AgenciaID' => 'AgenciaID']);
+        return $this->hasMany(Usuariosagencia::className(), ['AgenciaID' => 'AgenciaID']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getPersonas()
+    public function getUsuarios()
     {
-        return $this->hasMany(Personas::className(), ['PersonaID' => 'PersonaID'])->viaTable('agenciaspersonas', ['AgenciaID' => 'AgenciaID']);
+        return $this->hasMany(Usuarios::className(), ['UsuarioID' => 'UsuarioID'])->viaTable('usuariosagencia', ['AgenciaID' => 'AgenciaID']);
     }
 
     /**
@@ -132,6 +132,10 @@ class Agencias extends \yii\db\ActiveRecord
         ->andWhere(['=', 'AgenciaID', Yii::$app->user->identity->agencia])
         ->andWhere(['=', 'Estado', self::TarifaHabilitada])
         ->all();
-        return $result[0];
+        if(count($result)==0)
+            throw new \yii\base\UserException('No existe una tarifa vigente. 
+                Puede cargar un esquema desde el menu "Tarifas/Administrar"');
+        else
+            return $result[0];
     }
 }

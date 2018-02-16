@@ -65,7 +65,7 @@ class SearchCalificaciones extends Calificaciones
         ]);
 
         $query->andFilterWhere(['like', 'Comentario', $this->Comentario])
-                ->andFilterWhere(['like', 'Personas.Apellido', $this->Quien]);
+                ->andFilterWhere(['like', 'Usuarios.Apellido', $this->Quien]);
 
         return $dataProvider;
     }
