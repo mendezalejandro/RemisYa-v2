@@ -1,6 +1,6 @@
 <?php
 use yii\widgets\DetailView;
-include \Yii::$app->basePath.'/models/Constantes.php';
+use app\models\Vehiculos;
 /* @var $this yii\web\View */
 /* @var $model app\models\vehiculos */
 ?>
@@ -16,10 +16,10 @@ include \Yii::$app->basePath.'/models/Constantes.php';
             
             'value'=>function ($model){
                     switch($model->Estado) {
-                       case VehiculoEstado::Habilitado:
+                       case Vehiculos::Estado_Habilitado:
                            $value = "Habilitado";
                            break;
-                           case VehiculoEstado::Deshabilitado:
+                           case Vehiculos::Estado_Deshabilitado:
                            $value = "Deshabilitado";
                            break;
                        }

@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-include \Yii::$app->basePath.'/models/Constantes.php';
+use app\models\Tarifas;
 /* @var $this yii\web\View */
 /* @var $model app\models\tarifas */
 /* @var $form yii\widgets\ActiveForm */
@@ -19,7 +19,7 @@ include \Yii::$app->basePath.'/models/Constantes.php';
 
     <?= $form->field($model, 'PrecioKM')->textInput() ?>
 
-    <?= $form->field($model, 'Estado')->dropDownList(['prompt' => 'Seleccione un estado',TarifaEstado::Habilitada => 'Habilitada', TarifaEstado::Deshabilitada => 'Deshabilitada']) ?>
+    <?= $form->field($model, 'Estado')->dropDownList(['prompt' => 'Seleccione un estado',Tarifas::Estado_Habilitada => 'Habilitada', Tarifas::Estado_Deshabilitada => 'Deshabilitada']) ?>
 
   
 	<?php if (!Yii::$app->request->isAjax){ ?>

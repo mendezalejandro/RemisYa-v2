@@ -2,7 +2,7 @@
 use yii\helpers\Url;
 use app\models\Usuarios;
 use app\models\Vehiculos;
-include \Yii::$app->basePath.'/models/Constantes.php';
+use app\models\Viajes;
 return [
     [
         'class' => 'kartik\grid\SerialColumn',
@@ -45,18 +45,18 @@ return [
         'value'=>function ($data){
              $value;
              switch($data->ViajeTipo) {
-                case TipoViaje::Web:
+                case Viajes::Tipo_Web:
                     $value = "Web";
                     break;
-                case TipoViaje::Personal:
+                case Viajes::Tipo_Personal:
                     $value = "Personal";
                     break;
-                case TipoViaje::Telefonico:
+                case Viajes::Tipo_Telefonico:
                     $value = "Telefonico";
                     break;
                 }
              return $value;},
-        'filter' => [ TipoViaje::Web => 'Web', TipoViaje::Personal => 'Personal', TipoViaje::Telefonico => 'Telefonico',],
+        'filter' => [ Viajes::Tipo_Web => 'Web', Viajes::Tipo_Personal => 'Personal', Viajes::Tipo_Telefonico => 'Telefonico',],
          'label'=>'Tipo de viaje',
      ],
      [
@@ -77,21 +77,21 @@ return [
          'value'=>function ($data){
             $value;
             switch($data->Estado) {
-               case ViajeEstado::En_viaje:
+               case Viajes::Estado_EnViaje:
                    $value = "En viaje";
                    break;
-               case ViajeEstado::Reservado:
+               case Viajes::Estado_Reservado:
                    $value = "Reservado";
                    break;
-               case ViajeEstado::Cancelado:
+               case Viajes::Estado_Cancelado:
                    $value = "Cancelado";
                    break;
-                case ViajeEstado::Finalizado:
+                case Viajes::Estado_Finalizado:
                    $value = "Finalizado";
                    break;
                }
             return $value;}  ,
-            'filter' => [ViajeEstado::En_viaje => 'En viaje', ViajeEstado::Reservado => 'Reservado', ViajeEstado::Cancelado => 'Cancelado',ViajeEstado::Finalizado => 'Finalizado'],
+            'filter' => [Viajes::Estado_EnViaje => 'En viaje', Viajes::Estado_Reservado => 'Reservado', Viajes::Estado_Cancelado => 'Cancelado',Viajes::Estado_Finalizado => 'Finalizado'],
      ],
      [
         'class' => 'kartik\grid\ActionColumn',

@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Url;
-include \Yii::$app->basePath.'/models/Constantes.php';
+use app\models\Tarifas;
 return [
     [
         'class' => 'kartik\grid\SerialColumn',
@@ -27,15 +27,15 @@ return [
         'attribute'=>'Estado',
         'value'=>function ($model){
            switch($model->Estado) {
-              case TarifaEstado::Habilitada:
+              case Tarifas::Estado_Habilitada:
                   $value = "Habilitada";
                   break;
-                  case TarifaEstado::Deshabilitada:
+                  case Tarifas::Estado_Deshabilitada:
                   $value = "Deshabilitada";
                   break;
               }
            return $value;},
-        'filter' => [TarifaEstado::Habilitada => 'Habilitada', TarifaEstado::Deshabilitada => 'Deshabilitada'],
+        'filter' => [Tarifas::Estado_Habilitada => 'Habilitada', Tarifas::Estado_Deshabilitada => 'Deshabilitada'],
     ],
     [
         'class' => 'kartik\grid\ActionColumn',

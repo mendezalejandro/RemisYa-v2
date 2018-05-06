@@ -2,7 +2,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use app\models\Usuarios;
-include \Yii::$app->basePath.'/models/Constantes.php';
+use app\models\Viajes;
 return [
     [
         'class' => 'kartik\grid\SerialColumn',
@@ -43,16 +43,16 @@ return [
          'value'=>function ($data){
             $value;
             switch($data->Estado) {
-               case ViajeEstado::En_viaje:
+               case Viajes::Estado_EnViaje:
                    $value = "En viaje";
                    break;
-               case ViajeEstado::Reservado:
+               case Viajes::Estado_Reservado:
                    $value = "Solicitado";
                    break;
-               case ViajeEstado::Cancelado:
+               case Viajes::Estado_Cancelado:
                    $value = "Cancelado";
                    break;
-                case ViajeEstado::Finalizado:
+                case Viajes::Estado_Finalizado:
                    $value = "Finalizado";
                    break;
                }

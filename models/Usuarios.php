@@ -23,9 +23,13 @@ use yii\web\IdentityInterface;
  */
 class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
 {
-    const Chofer =3;
-    const Cliente =4;
-    const En_viaje = 0;
+    const Estado_Habilitado = 0;
+    const Estado_Deshabilitado = 1;
+
+    const Rol_Administrador = 1;
+    const Rol_Recepcionista = 2;
+    const Rol_Chofer = 3;
+    const Rol_Cliente = 4;
     /**
      * @inheritdoc
      */
@@ -206,7 +210,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return self::find()
         ->joinWith(['agencias'])
-        ->andFilterWhere(['=', 'RolID', self::Cliente])
+        ->andFilterWhere(['=', 'RolID', self::Rol_Cliente])
         ->andWhere(['=', 'Agencias.AgenciaID', Yii::$app->user->identity->agencia])
         ->all();
     }
@@ -214,7 +218,7 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return self::find()
         ->joinWith(['agencias'])
-        ->andFilterWhere(['=', 'RolID', self::Chofer])
+        ->andFilterWhere(['=', 'RolID', self::Rol_Chofer])
         ->andWhere(['=', 'Agencias.AgenciaID', Yii::$app->user->identity->agencia])
         ->all();
     }
@@ -224,13 +228,13 @@ class Usuarios extends \yii\db\ActiveRecord implements IdentityInterface
         $command = $connection->createCommand('
             SELECT P.* FROM UsuariosAgencia AP
             INNER JOIN Usuarios P ON P.UsuarioID = AP.UsuarioID
-            WHERE AP.AgenciaID = '.Yii::$app->user->identity->agencia.' AND P.RolID = '.self::Chofer.'
+            WHERE AP.AgenciaID = '.Yii::$app->user->identity->agencia.' AND P.RolID = '.self::Rol_Chofer.'
             AND P.UsuarioID NOT IN 
             (
             SELECT P.UsuarioID FROM UsuariosAgencia AP
             INNER JOIN Usuarios P ON P.UsuarioID = AP.UsuarioID
             INNER JOIN Viajes V ON V.ChoferID = P.UsuarioID
-            WHERE AP.AgenciaID = '.Yii::$app->user->identity->agencia.' AND V.Estado = '.self::En_viaje.' AND P.RolID = '.self::Chofer.'
+            WHERE AP.AgenciaID = '.Yii::$app->user->identity->agencia.' AND V.Estado = '.Viajes::Estado_EnViaje.' AND P.RolID = '.self::Rol_Chofer.'
             )');
         $result = $command->queryAll();
         return $result;

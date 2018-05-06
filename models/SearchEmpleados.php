@@ -12,10 +12,6 @@ use app\models\Usuarios;
  */
 class SearchEmpleados extends Usuarios
 {
-    const Administrador = 1;
-    const Recepcionista = 2;
-    const Chofer = 3;
-    const Cliente = 4;
     /**
      * @inheritdoc
      */
@@ -67,7 +63,7 @@ class SearchEmpleados extends Usuarios
             'Agencias.AgenciaID' => Yii::$app->user->identity->agencia,
         ]);
         //Para la grilla de Empleados del administrador traigo todos los usuarios de la agencia y que nos son Clientes.
-        $query->andFilterWhere(['<>','RolID',self::Cliente]); 
+        $query->andFilterWhere(['<>','RolID',Usuarios::Rol_Cliente]); 
 
         $query->andFilterWhere(['like', 'Usuario', $this->Usuario])
             ->andFilterWhere(['like', 'Password', $this->Password])

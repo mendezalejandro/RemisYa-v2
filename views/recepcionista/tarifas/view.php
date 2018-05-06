@@ -1,7 +1,7 @@
 <?php
 
 use yii\widgets\DetailView;
-include \Yii::$app->basePath.'/models/Constantes.php';
+use app\models\Tarifas;
 /* @var $this yii\web\View */
 /* @var $model app\models\tarifas */
 ?>
@@ -17,10 +17,10 @@ include \Yii::$app->basePath.'/models/Constantes.php';
             ['label' => 'Estado',
             'value'=>function ($model){
                     switch($model->Estado) {
-                       case TarifaEstado::Habilitada:
+                       case Tarifas::Estado_Habilitada:
                            $value = "Habilitada";
                            break;
-                           case TarifaEstado::Deshabilitada:
+                           case Tarifas::Estado_Deshabilitada:
                            $value = "Deshabilitada";
                            break;
                        }

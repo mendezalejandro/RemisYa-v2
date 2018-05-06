@@ -2,9 +2,9 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=remisya_dev',
-    'username' => 'root',
-    'password' => '',
+    'dsn' => 'mysql:host=maesolutions.c77ixotdwytn.sa-east-1.rds.amazonaws.com;dbname=remisya_dev',
+    'username' => 'emendez',
+    'password' => '#Ea34452525',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)

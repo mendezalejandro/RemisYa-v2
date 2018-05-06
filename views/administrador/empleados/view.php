@@ -1,7 +1,7 @@
 <?php
 
 use yii\widgets\DetailView;
-include \Yii::$app->basePath.'/models/Constantes.php';
+use app\models\Usuarios;
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
 ?>
@@ -23,10 +23,10 @@ include \Yii::$app->basePath.'/models/Constantes.php';
             
             'value'=>function ($model){
                     switch($model->Estado) {
-                       case UsuarioEstado::Habilitado:
+                       case Usuarios::Estado_Habilitado:
                            $value = "Habilitado";
                            break;
-                           case UsuarioEstado::Deshabilitado:
+                           case Usuarios::Estado_Deshabilitado:
                            $value = "Deshabilitado";
                            break;
                        }

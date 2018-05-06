@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Url;
-include \Yii::$app->basePath.'/models/Constantes.php';
+use app\models\Vehiculos;
 return [
     [
         'class' => 'kartik\grid\SerialColumn',
@@ -31,15 +31,15 @@ return [
         'attribute'=>'Estado',
         'value'=>function ($model){
            switch($model->Estado) {
-              case UsuarioEstado::Habilitado:
+              case Usuarios::Estado_Habilitado:
                   $value = "Habilitado";
                   break;
-                  case UsuarioEstado::Deshabilitado:
+                  case Usuarios::Estado_Deshabilitado:
                   $value = "Deshabilitado";
                   break;
               }
            return $value;},
-        'filter' => [VehiculoEstado::Habilitado => 'Habilitado', VehiculoEstado::Deshabilitado => 'Deshabilitado'],
+        'filter' => [Vehiculos::Estado_Habilitado => 'Habilitado', Vehiculos::Estado_Deshabilitado => 'Deshabilitado'],
     ],
     [
         'class' => 'kartik\grid\ActionColumn',

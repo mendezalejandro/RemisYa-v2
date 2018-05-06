@@ -3,7 +3,7 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use app\models\Usuarios;
 use app\models\Vehiculos;
-include \Yii::$app->basePath.'/models/Constantes.php';
+use app\models\Viajes;
 return [
     [
         'class' => 'kartik\grid\SerialColumn',
@@ -64,18 +64,18 @@ return [
         'value'=>function ($data){
            $value;
            switch($data->Estado) {
-              case ViajeEstado::En_viaje:
+              case Viajes::Estado_EnViaje:
                   $value = "En viaje";
                   break;
-              case ViajeEstado::Cancelado:
+              case Viajes::Estado_Cancelado:
                   $value = "Cancelado";
                   break;
-               case ViajeEstado::Finalizado:
+               case Viajes::Estado_Finalizado:
                   $value = "Finalizado";
                   break;
               }
            return $value;}  ,
-           'filter' => [ViajeEstado::En_viaje => 'En viaje', ViajeEstado::Cancelado => 'Cancelado',ViajeEstado::Finalizado => 'Finalizado'],
+           'filter' => [Viajes::Estado_EnViaje => 'En viaje', Viajes::Estado_Cancelado => 'Cancelado',Viajes::Estado_Finalizado => 'Finalizado'],
     ],
      [
         'class' => 'kartik\grid\ActionColumn',

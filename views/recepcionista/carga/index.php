@@ -106,7 +106,7 @@ Modal::begin([
                                             </span>
                                         </div>
                                     </div>
-                                </div>
+                                </div> 
                             </div>
                             <?= $form->field($model, 'ImporteTotal')->input("text", ['maxlength' => '50','id' => 'importetotal'])->label("Importe aproximado"); ?>
                             <?= $form->field($model, 'ChoferID')->dropDownList(\yii\helpers\ArrayHelper::map(Usuarios::getChoferesDisponibles(), 'UsuarioID', function($model) {return $model['Nombre'].' '.$model['Apellido'];}))->label('Chofer') ?>

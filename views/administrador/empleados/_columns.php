@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Url;
-include \Yii::$app->basePath.'/models/Constantes.php';
+use app\models\Usuario;
 return [
     [
         'class' => 'kartik\grid\SerialColumn',
@@ -35,22 +35,22 @@ return [
          'attribute'=>'RolID',
          'value'=>'rol.Descripcion',
          'label'=>'Rol',
-         'filter' => [ TipoUsuario::Administrador => 'Administrador', TipoUsuario::Recepcionista => 'Recepcionista', TipoUsuario::Chofer => 'Chofer'],
+         'filter' => [ Usuarios::Rol_Administrador => 'Administrador', Usuarios::Rol_Recepcionista => 'Recepcionista', Usuarios::Rol_Chofer => 'Chofer'],
      ],
      [
          'class'=>'\kartik\grid\DataColumn',
          'attribute'=>'Estado',
          'value'=>function ($model){
             switch($model->Estado) {
-               case UsuarioEstado::Habilitado:
+               case Usuarios::Estado_Habilitado:
                    $value = "Habilitado";
                    break;
-                   case UsuarioEstado::Deshabilitado:
+                   case Usuarios::Estado_Deshabilitado:
                    $value = "Deshabilitado";
                    break;
                }
             return $value;},
-         'filter' => [ UsuarioEstado::Habilitado => 'Habilitado', UsuarioEstado::Deshabilitado => 'Deshabilitado'],
+         'filter' => [ Usuarios::Estado_Habilitado => 'Habilitado', Usuarios::Estado_Deshabilitado => 'Deshabilitado'],
      ],
     [
         'class' => 'kartik\grid\ActionColumn',

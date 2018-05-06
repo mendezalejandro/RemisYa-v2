@@ -7,6 +7,7 @@ use yii\base\Model;
 
 class TipoUsuario
 {
+    
     public $rolID;
 
     public static function esAdministrador($rolID){

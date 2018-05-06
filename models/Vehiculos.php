@@ -3,7 +3,6 @@
 namespace app\models;
 
 use Yii;
-
 /**
  * This is the model class for table "vehiculos".
  *
@@ -21,7 +20,8 @@ use Yii;
  */
 class Vehiculos extends \yii\db\ActiveRecord
 {
-    const En_viaje = 0;
+    const Estado_Habilitado = 0;
+    const Estado_Deshabilitado = 1;
     /**
      * @inheritdoc
      */
@@ -86,10 +86,9 @@ class Vehiculos extends \yii\db\ActiveRecord
     {
         $connection = Yii::$app->getDb();
         $command = $connection->createCommand('
-        SELECT * FROM Vehiculos VEH WHERE VEH.VehiculoID IN (SELECT DISTINCT(VE.VehiculoID)
-        FROM Vehiculos VE 
-        INNER JOIN Viajes V ON V.VehiculoID = VE.VehiculoID
-        WHERE V.AgenciaID = '.Yii::$app->user->identity->agencia.' AND V.Estado != '.self::En_viaje.')');
+        SELECT * FROM Vehiculos VE
+        LEFT OUTER JOIN Viajes V ON V.VehiculoID = VE.VehiculoID
+        WHERE (V.Estado IS NULL OR V.Estado != '.Viajes::Estado_EnViaje.') AND VE.AgenciaID = '.Yii::$app->user->identity->agencia);
         $result = $command->queryAll();
         return $result;
     }

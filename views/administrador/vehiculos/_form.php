@@ -2,7 +2,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use dosamigos\datepicker\DatePicker;
-include \Yii::$app->basePath.'/models/Constantes.php';
+use app\models\Vehiculos;
 /* @var $this yii\web\View */
 /* @var $model app\models\vehiculos */
 /* @var $form yii\widgets\ActiveForm */
@@ -18,7 +18,7 @@ include \Yii::$app->basePath.'/models/Constantes.php';
 
     <?= $form->field($model, 'Marca')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'Estado')->dropDownList(['prompt' => 'Seleccione un estado', VehiculoEstado::Habilitado => 'Habilitado', VehiculoEstado::Deshabilitado => 'Deshabilitado']) ?>
+    <?= $form->field($model, 'Estado')->dropDownList(['prompt' => 'Seleccione un estado', Vehiculos::Estado_Habilitado => 'Habilitado', Vehiculos::Estado_Deshabilitado => 'Deshabilitado']) ?>
     <?= $form->field($model, 'FechaAlta')->widget(
     DatePicker::className(), [
         //'inline' => false, 

@@ -38,6 +38,14 @@ use Yii;
  */
 class Viajes extends \yii\db\ActiveRecord
 {
+    const Estado_EnViaje = 0;
+    const Estado_Reservado = 1;
+    const Estado_Cancelado = 2;
+    const Estado_Finalizado = 3;
+
+    const Tipo_Web = 0;
+    const Tipo_Personal = 1;
+    const Tipo_Telefonico = 2;
     /**
      * @inheritdoc
      */

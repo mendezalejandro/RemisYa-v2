@@ -24,7 +24,8 @@ use yii\base\Exception;
  */
 class Agencias extends \yii\db\ActiveRecord
 {
-    const TarifaHabilitada=0;
+    const Estado_Habilitada = 0;
+    const Estado_Deshabilitada = 1;
     /**
      * @inheritdoc
      */
@@ -130,7 +131,7 @@ class Agencias extends \yii\db\ActiveRecord
     {
         $result = Tarifas::find()
         ->andWhere(['=', 'AgenciaID', Yii::$app->user->identity->agencia])
-        ->andWhere(['=', 'Estado', self::TarifaHabilitada])
+        ->andWhere(['=', 'Estado', Tarifas::Estado_Habilitada])
         ->all();
         if(count($result)==0)
             throw new \yii\base\UserException('No existe una tarifa vigente. 

@@ -18,6 +18,8 @@ use Yii;
  */
 class Clientes extends \yii\db\ActiveRecord
 {
+    const Estado_Habilitada = 0;
+    const Estado_Deshabilitada = 1;
     /**
      * @inheritdoc
      */

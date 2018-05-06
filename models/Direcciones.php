@@ -16,6 +16,10 @@ use Yii;
  */
 class Direcciones extends \yii\db\ActiveRecord
 {
+    const Direccion_Default = 1;
+
+    const Tipo_Cliente = 0;
+    const Tipo_Agencia = 1;
     /**
      * @inheritdoc
      */

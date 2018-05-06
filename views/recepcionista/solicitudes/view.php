@@ -1,7 +1,7 @@
 <?php
 
 use yii\widgets\DetailView;
-include \Yii::$app->basePath.'/models/Constantes.php';
+use app\models\Viajes;
 /* @var $this yii\web\View */
 /* @var $model app\models\Viajes */
 ?>
@@ -28,13 +28,13 @@ include \Yii::$app->basePath.'/models/Constantes.php';
                 'value'=>function ($data){
                      $value;
                      switch($data->ViajeTipo) {
-                        case TipoViaje::Web:
+                        case Viajes::Tipo_Web:
                             $value = "Web";
                             break;
-                        case TipoViaje::Personal:
+                        case Viajes::Tipo_Personal:
                             $value = "Personal";
                             break;
-                        case TipoViaje::Telefonico:
+                        case Viajes::Tipo_Telefonico:
                             $value = "Telefonico";
                             break;
                         }
@@ -50,16 +50,16 @@ include \Yii::$app->basePath.'/models/Constantes.php';
                 'value'=>function ($data){
                    $value;
                    switch($data->Estado) {
-                      case ViajeEstado::En_viaje:
+                      case Viajes::Estado_EnViaje:
                           $value = "En viaje";
                           break;
-                      case ViajeEstado::Reservado:
+                      case Viajes::Estado_Reservado:
                           $value = "Reservado";
                           break;
-                      case ViajeEstado::Cancelado:
+                      case Viajes::Estado_Cancelado:
                           $value = "Cancelado";
                           break;
-                       case ViajeEstado::Finalizado:
+                       case Viajes::Estado_Finalizado:
                           $value = "Finalizado";
                           break;
                       }
